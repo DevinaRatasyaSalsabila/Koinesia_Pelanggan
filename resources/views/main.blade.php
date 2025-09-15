@@ -316,7 +316,7 @@
     <script src="{{ asset('files/js/jquery.ajaxchimp.min.js') }}"></script>
 
     <!-- Custom Script -->
-    <script src="{{ asset('files/js/custom.js') }}"></script>
+    <script src="{{asset('files/js/custom.js')}}"></script>
 
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
