@@ -83,7 +83,7 @@
 
 
 
-    <!-- HEADER-1
+    {{-- <!-- HEADER-1
   ============================================= -->
     <header id="header-1" class="header navik-header header-shadow center-menu-1 header-transparent">
         <div class="container">
@@ -94,7 +94,7 @@
 
 
                 <!-- CALL BUTTON -->
-                <div class="callusbtn"><a href="tel:123456789"><i class="fas fa-phone"></i></a></div>
+                <div class="callusbtn"><a href="tel:0859348539"><i class="fas fa-phone"></i></a></div>
 
 
                 <!-- LOGO IMAGE -->
@@ -149,7 +149,73 @@
 
 
         </div> <!-- End container -->
-    </header> <!-- END HEADER-1 -->
+    </header> <!-- END HEADER-1 --> --}}
+
+    <!-- HEADER-3
+  ============================================= -->
+    <header id="header-3" class="header navik-header header-transparent header-shadow">
+        <div class="container">
+            <!-- NAVIGATION MENU -->
+            <div class="navik-header-container">
+                <!-- CALL BUTTON -->
+                <div class="callusbtn">
+                    <a href="tel:0859348539"><i class="fas fa-phone"></i></a>
+                </div>
+
+                <!-- LOGO IMAGE -->
+                <div class="logo" data-mobile-logo="{{ asset('files/images/logo.png') }}"
+                    data-sticky-logo="{{ asset('files/images/logo.png') }}">
+                    <a href="#hero-3">
+                        <img src="{{ asset('files/images/logo.png') }}" alt="header-logo" />
+                    </a>
+                </div>
+
+                <!-- BURGER MENU -->
+                <div class="burger-menu">
+                    <div class="line-menu line-half first-line"></div>
+                    <div class="line-menu"></div>
+                    <div class="line-menu line-half last-line"></div>
+                </div>
+
+                <!-- MAIN MENU -->
+                <nav class="navik-menu menu-caret navik-yellow">
+                    <ul class="top-list">
+                        <li>
+                            <a href="#">Beranda</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Tentang Kami</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Produk</a>
+                        </li>
+                        <li>
+                            <a href="#">Kontak</a>
+                        </li>
+
+                        <!-- HEADER BUTTON  -->
+                        <li class="nav-btn yellow-color">
+                            <a href="tel:0859348539">08459348594</a>
+                        </li>
+
+                        <!-- BASKET ICON -->
+                        <li class="basket-ico ico-30">
+                            <a href="cart.html">
+                                <span class="ico-holder"><span class="flaticon-shopping-bag"></span>
+                                    <em class="roundpoint"></em></span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- END MAIN MENU -->
+            </div>
+            <!-- END NAVIGATION MENU -->
+        </div>
+        <!-- End container -->
+    </header>
+    <!-- END HEADER-3 -->
 
 
 
@@ -165,131 +231,99 @@
 
         <!-- HERO-9
    ============================================= -->
-        <!-- FOOTER-2
+
+        <!-- FOOTER-1
    ============================================= -->
-        <footer id="footer-2" class="footer division">
+        <footer id="footer-1" class="footer division">
             <div class="container">
-                <div class="footer-2-holder text-center">
-                    <div class="row">
+                <div class="row">
 
 
-                        <!-- FOOTER INFO -->
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="footer-info mb-30">
+                    <!-- FOOTER INFO -->
+                    <div class="col-md-5 col-lg-4 col-xl-4">
+                        <div class="footer-info">
 
-                                <!-- Title -->
-                                <h5 class="h5-md">Location</h5>
-
-                                <!-- Address -->
-                                <p>8721 M Central Avenue,</p>
-                                <p>Los Angeles, CA 90036,</p>
-                                <p>United States</p>
-
+                            <!-- Footer Logo -->
+                            <div class="footer-logo">
+                                <img src="{{ asset('files/images/logo.png') }}" alt="footer-logo" />
                             </div>
+
+                            <!-- Footer Copyright -->
+                            <p>&copy; 2025. All Rights Reserved codewave</p>
+
                         </div>
+                    </div>
 
 
-                        <!-- WORKING HOURS -->
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="footer-info mb-30">
+                    <!-- FOOTER CONTACTS -->
+                    <div class="col-md-7 col-lg-4 col-xl-5">
+                        <div class="footer-contacts">
 
-                                <!-- Title -->
-                                <h5 class="h5-md">Working Hours</h5>
+                            <!-- Address -->
+                            <p class="p-xl mt-10">Los Angeles,</p>
+                            <p class="p-xl">8721 M Central Avenue, CA 90036</p>
 
-                                <!-- Text -->
-                                <p>Mon-Fri: 9:00AM - 10:00PM</p>
-                                <p>Saturday: 10:00AM - 8:30PM</p>
-                                <p>Sunday: 12:00PM - 5:00PM</p>
+                            <!-- Contacts -->
+                            <p class="p-lg foo-email">Email: <a
+                                    href="mailto:yourdomain@mail.com">hello@yourdomain.com</a></p>
+                            <p class="p-lg">Call Now: <span class="yellow-color"><a
+                                        href="tel:123456789">789-654-3210</a></span></p>
 
-                            </div>
                         </div>
+                    </div>
 
 
-                        <!-- FOOTER CONTACTS -->
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="footer-contacts mb-30">
+                    <!-- FOOTER INSTAGRAM -->
+                    <div class="col-md-12 col-lg-4 col-xl-3">
+                        <div class="footer-img">
+                            <!-- Images -->
+                            <ul class="text-center clearfix"
+                                style="display:flex; flex-wrap:wrap; justify-content:center; list-style:none; padding:15px; margin:0;">
 
-                                <!-- Title -->
-                                <h5 class="h5-md">Order Now</h5>
-
-                                <p>Quaerat neque purus ipsum at neque dolor primis tempus</p>
-                                <p class="mt-5"><span class="meat-color"><a
-                                            href="tel:123456789">789-654-3210</a></span></p>
-
-                            </div>
+                                <li style="flex:0 0 33.33%; text-align:center; margin-bottom:15px;">
+                                    <a href="#" target="_blank">
+                                        <img src="{{ asset('files/images/footer-ig.png') }}" alt="Instagram"
+                                            width="35" height="35">
+                                    </a>
+                                </li>
+                                <li style="flex:0 0 33.33%; text-align:center; margin-bottom:15px;">
+                                    <a href="#" target="_blank">
+                                        <img src="{{ asset('files/images/footer-email.png') }}" alt="Email"
+                                            width="35" height="35">
+                                    </a>
+                                </li>
+                                <li style="flex:0 0 33.33%; text-align:center; margin-bottom:15px;">
+                                    <a href="#" target="_blank">
+                                        <img src="{{ asset('files/images/footer-tele.png') }}" alt="Telegram"
+                                            width="35" height="35">
+                                    </a>
+                                </li>
+                                <li style="flex:0 0 33.33%; text-align:center;">
+                                    <a href="#" target="_blank">
+                                        <img src="{{ asset('files/images/footer-youtube.png') }}" alt="YouTube"
+                                            width="35" height="35">
+                                    </a>
+                                </li>
+                                <li style="flex:0 0 33.33%; text-align:center;">
+                                    <a href="#" target="_blank">
+                                        <img src="{{ asset('files/images/footer-facebook.png') }}" alt="Facebook"
+                                            width="35" height="35">
+                                    </a>
+                                </li>
+                                <li style="flex:0 0 33.33%; text-align:center;">
+                                    <a href="#" target="_blank">
+                                        <img src="{{ asset('files/images/footer-wa.png') }}" alt="WhatsApp"
+                                            width="35" height="35">
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
+                    </div> <!-- END FOOTER IMAGES -->
 
 
-                        <!-- FOOTER IMAGES -->
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="footer-socials-links mb-30">
-
-                                <!-- Title -->
-                                <h5 class="h5-md">Follow Us</h5>
-
-                                <!-- Text -->
-                                <p>Quaerat neque purus ipsum at neque dolor primis tempus</p>
-
-                                <!-- List -->
-                                <ul class="foo-socials text-center clearfix">
-                                    <li><a href="#" class="ico-facebook"><i class="fab fa-facebook-f"></i></a>
-                                    </li>
-                                    <li><a href="#" class="ico-twitter"><i class="fab fa-twitter"></i></a>
-                                    </li>
-                                    <li><a href="#" class="ico-instagram"><i class="fab fa-instagram"></i></a>
-                                    </li>
-                                    <li><a href="#" class="ico-youtube"><i class="fab fa-youtube"></i></a>
-                                    </li>
-
-                                    <!--
-          <li><a href="#" class="ico-dribbble"><i class="fab fa-dribbble"></i></a></li>
-          <li><a href="#" class="ico-behance"><i class="fab fa-behance"></i></a></li>
-          <li><a href="#" class="ico-linkedin"><i class="fab fa-linkedin-in"></i></a></li>
-          <li><a href="#" class="ico-tumblr"><i class="fab fa-tumblr"></i></a></li>
-          <li><a href="#" class="ico-pinterest"><i class="fab fa-pinterest-p"></i></a></li>
-          <li><a href="#" class="ico-google-plus"><i class="fab fa-google-plus-g"></i></a></li>
-          <li><a href="#" class="ico-vk"><i class="fab fa-vk"></i></a></li>-->
-                                </ul>
-
-                            </div>
-                        </div> <!-- END FOOTER IMAGES -->
-
-
-                    </div> <!-- END FOOTER CONTENT -->
-
-
-                    <!-- FOOTER COPYRIGHT -->
-                    <div class="bottom-footer">
-                        <div class="row d-flex align-items-center">
-                            <div class="col-lg-10 offset-lg-1">
-
-                                <!-- Links List -->
-                                <ul class="bottom-footer-list clearfix">
-                                    <li>
-                                        <p>&copy; 2020 Testo. All Rights Reserved</p>
-                                    </li>
-                                    <li>
-                                        <p class="first-li"><a href="#">About Us</a></p>
-                                    </li>
-                                    <li>
-                                        <p><a href="#">Gift Cards</a></p>
-                                    </li>
-                                    <li>
-                                        <p><a href="#">Terms Of Use</a></p>
-                                    </li>
-                                    <li>
-                                        <p class="last-li"><a href="#">Privacy Policy</a></p>
-                                    </li>
-                                </ul>
-
-                            </div>
-                        </div> <!-- End row -->
-                    </div> <!-- END FOOTER COPYRIGHT -->
-
-
-                </div> <!-- End footer-2-holder -->
+                </div> <!-- End row -->
             </div> <!-- End container -->
-        </footer> <!-- END FOOTER-2 -->
+        </footer> <!-- END FOOTER-1 -->
     </div> <!-- END PAGE CONTENT -->
 
 
@@ -316,7 +350,7 @@
     <script src="{{ asset('files/js/jquery.ajaxchimp.min.js') }}"></script>
 
     <!-- Custom Script -->
-    <script src="{{asset('files/js/custom.js')}}"></script>
+    <script src="{{ asset('files/js/custom.js') }}"></script>
 
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
