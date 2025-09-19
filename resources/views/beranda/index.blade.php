@@ -22,7 +22,7 @@
     </section> --}}
 
     <!-- HERO-4
-                                                           ============================================= -->
+                                                                                                                   ============================================= -->
     <section id="hero-4" class="bg-fixed hero-section division">
         <div class="container">
             <div class="row d-flex align-items-center">
@@ -151,420 +151,56 @@
                 </p>
             </div>
             <div class="row">
-                <div class="col-sm-4 col-lg-3">
-                    <div class="menu-6-item bg-white">
-                        <div class="menu-6-img rel">
-                            <div class="hover-overlay">
-                                <img class="img-fluid" src="{{ asset('files/images/produk-koi.png') }}" alt="menu-image" />
-                                <span class="item-code bg-tra-dark">Code: 6464</span>
-                                <div class="menu-img-zoom ico-25">
-                                    <a href="{{ asset('files/images/produk-koi.png') }}" class="image-link">
-                                        <span class="flaticon-zoom"></span>
-                                    </a>
+                @if (!empty($produk))
+                    @foreach ($produk as $prod)
+                        <div class="col-sm-4 col-lg-3">
+                            <div class="menu-6-item bg-white">
+                                <div class="menu-6-img rel">
+                                    <div class="hover-overlay">
+                                        <img class="img-fluid" src="{{ $prod['gambar_url'] }}" alt="menu-image" />
+                                        <span class="item-code bg-tra-dark">Kode: {{ $prod['kode_produk'] }}</span>
+                                        <div class="menu-img-zoom ico-25">
+                                            <a href="{{ $prod['gambar_url'] }}" class="image-link">
+                                                <span class="flaticon-zoom"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="menu-6-txt rel">
+                                    <div class="like-ico ico-25">
+                                        <a href="#">
+                                            <span class="flaticon-heart"></span>
+                                        </a>
+                                    </div>
+                                    <h5 class="h5-sm">
+                                        {{ $prod['nama_produk'] }}
+                                    </h5>
+                                    <!-- Description -->
+                                    <p class="grey-color">
+                                        {{ \Illuminate\Support\Str::limit($prod['deskripsi_produk'], 25) }}
+                                    </p>
+                                    <div class="menu-6-price bg-meat">
+                                        <h5 class="h6-xs yellow-color">
+                                            {{ 'Rp ' . number_format($prod['harga_Satuan'], 0, ',', '.') }}
+
+                                        </h5>
+                                    </div>
+                                    <div class="add-to-cart bg-yellow ico-10">
+                                        <button type="button" class="btn-cart-add-1" data-id="{{ $prod['kode_produk'] }}"
+                                            data-nama="{{ $prod['nama_produk'] }}" data-harga="{{ $prod['harga_Satuan'] }}"
+                                            data-gambar="{{ $prod['gambar_url'] }}">
+                                            <span class="flaticon-shopping-bag"></span>
+                                            Keranjang
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="menu-6-txt rel">
-                            {{-- <div class="item-rating">
-                                <div class="stars-rating stars-lg">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                            </div> --}}
-
-                            <div class="like-ico ico-25">
-                                <a href="#">
-                                    <span class="flaticon-heart"></span>
-                                </a>
-                            </div>
-                            <h5 class="h5-sm">
-                                Koi kohaku
-                            </h5>
-                            <!-- Description -->
-                            <p class="grey-color">
-                                Chicken breast, chilli sauce, tomatoes, pickles, coleslaw
-                            </p>
-                            <div class="menu-6-price bg-meat">
-                                <h5 class="h6-xs yellow-color">
-                                    Rp30.000
-                                </h5>
-                            </div>
-                            <div class="add-to-cart bg-yellow ico-10">
-                                <a href="#">
-                                    <span class="flaticon-shopping-bag"></span>
-                                    Keranjang
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-3">
-                    <div class="menu-6-item bg-white">
-                        <div class="menu-6-img rel">
-                            <div class="hover-overlay">
-                                <img class="img-fluid" src="{{ asset('files/images/produk-koi.png') }}" alt="menu-image" />
-                                <span class="item-code bg-tra-dark">Code: 6464</span>
-                                <div class="menu-img-zoom ico-25">
-                                    <a href="{{ asset('files/images/produk-koi.png') }}" class="image-link">
-                                        <span class="flaticon-zoom"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="menu-6-txt rel">
-                            {{-- <div class="item-rating">
-                                <div class="stars-rating stars-lg">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                            </div> --}}
-
-                            <div class="like-ico ico-25">
-                                <a href="#">
-                                    <span class="flaticon-heart"></span>
-                                </a>
-                            </div>
-                            <h5 class="h5-sm">
-                                Koi kohaku
-                            </h5>
-                            <!-- Description -->
-                            <p class="grey-color">
-                                Chicken breast, chilli sauce, tomatoes, pickles, coleslaw
-                            </p>
-                            <div class="menu-6-price bg-meat">
-                                <h5 class="h6-xs yellow-color">
-                                    Rp30.000
-                                </h5>
-                            </div>
-                            <div class="add-to-cart bg-yellow ico-10">
-                                <a href="#">
-                                    <span class="flaticon-shopping-bag"></span>
-                                    Keranjang
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-3">
-                    <div class="menu-6-item bg-white">
-                        <div class="menu-6-img rel">
-                            <div class="hover-overlay">
-                                <img class="img-fluid" src="{{ asset('files/images/produk-koi.png') }}"
-                                    alt="menu-image" />
-                                <span class="item-code bg-tra-dark">Code: 6464</span>
-                                <div class="menu-img-zoom ico-25">
-                                    <a href="{{ asset('files/images/produk-koi.png') }}" class="image-link">
-                                        <span class="flaticon-zoom"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="menu-6-txt rel">
-                            {{-- <div class="item-rating">
-                                <div class="stars-rating stars-lg">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                            </div> --}}
-
-                            <div class="like-ico ico-25">
-                                <a href="#">
-                                    <span class="flaticon-heart"></span>
-                                </a>
-                            </div>
-                            <h5 class="h5-sm">
-                                Koi kohaku
-                            </h5>
-                            <!-- Description -->
-                            <p class="grey-color">
-                                Chicken breast, chilli sauce, tomatoes, pickles, coleslaw
-                            </p>
-                            <div class="menu-6-price bg-meat">
-                                <h5 class="h6-xs yellow-color">
-                                    Rp30.000
-                                </h5>
-                            </div>
-                            <div class="add-to-cart bg-yellow ico-10">
-                                <a href="#">
-                                    <span class="flaticon-shopping-bag"></span>
-                                    Keranjang
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-3">
-                    <div class="menu-6-item bg-white">
-                        <div class="menu-6-img rel">
-                            <div class="hover-overlay">
-                                <img class="img-fluid" src="{{ asset('files/images/produk-koi.png') }}"
-                                    alt="menu-image" />
-                                <span class="item-code bg-tra-dark">Code: 6464</span>
-                                <div class="menu-img-zoom ico-25">
-                                    <a href="{{ asset('files/images/produk-koi.png') }}" class="image-link">
-                                        <span class="flaticon-zoom"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="menu-6-txt rel">
-                            {{-- <div class="item-rating">
-                                <div class="stars-rating stars-lg">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                            </div> --}}
-
-                            <div class="like-ico ico-25">
-                                <a href="#">
-                                    <span class="flaticon-heart"></span>
-                                </a>
-                            </div>
-                            <h5 class="h5-sm">
-                                Koi kohaku
-                            </h5>
-                            <!-- Description -->
-                            <p class="grey-color">
-                                Chicken breast, chilli sauce, tomatoes, pickles, coleslaw
-                            </p>
-                            <div class="menu-6-price bg-meat">
-                                <h5 class="h6-xs yellow-color">
-                                    Rp30.000
-                                </h5>
-                            </div>
-                            <div class="add-to-cart bg-yellow ico-10">
-                                <a href="#">
-                                    <span class="flaticon-shopping-bag"></span>
-                                    Keranjang
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-3">
-                    <div class="menu-6-item bg-white">
-                        <div class="menu-6-img rel">
-                            <div class="hover-overlay">
-                                <img class="img-fluid" src="{{ asset('files/images/produk-koi.png') }}"
-                                    alt="menu-image" />
-                                <span class="item-code bg-tra-dark">Code: 6464</span>
-                                <div class="menu-img-zoom ico-25">
-                                    <a href="{{ asset('files/images/produk-koi.png') }}" class="image-link">
-                                        <span class="flaticon-zoom"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="menu-6-txt rel">
-                            {{-- <div class="item-rating">
-                                <div class="stars-rating stars-lg">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                            </div> --}}
-
-                            <div class="like-ico ico-25">
-                                <a href="#">
-                                    <span class="flaticon-heart"></span>
-                                </a>
-                            </div>
-                            <h5 class="h5-sm">
-                                Koi kohaku
-                            </h5>
-                            <!-- Description -->
-                            <p class="grey-color">
-                                Chicken breast, chilli sauce, tomatoes, pickles, coleslaw
-                            </p>
-                            <div class="menu-6-price bg-meat">
-                                <h5 class="h6-xs yellow-color">
-                                    Rp30.000
-                                </h5>
-                            </div>
-                            <div class="add-to-cart bg-yellow ico-10">
-                                <a href="#">
-                                    <span class="flaticon-shopping-bag"></span>
-                                    Keranjang
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-3">
-                    <div class="menu-6-item bg-white">
-                        <div class="menu-6-img rel">
-                            <div class="hover-overlay">
-                                <img class="img-fluid" src="{{ asset('files/images/produk-koi.png') }}"
-                                    alt="menu-image" />
-                                <span class="item-code bg-tra-dark">Code: 6464</span>
-                                <div class="menu-img-zoom ico-25">
-                                    <a href="{{ asset('files/images/produk-koi.png') }}" class="image-link">
-                                        <span class="flaticon-zoom"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="menu-6-txt rel">
-                            {{-- <div class="item-rating">
-                                <div class="stars-rating stars-lg">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                            </div> --}}
-
-                            <div class="like-ico ico-25">
-                                <a href="#">
-                                    <span class="flaticon-heart"></span>
-                                </a>
-                            </div>
-                            <h5 class="h5-sm">
-                                Koi kohaku
-                            </h5>
-                            <!-- Description -->
-                            <p class="grey-color">
-                                Chicken breast, chilli sauce, tomatoes, pickles, coleslaw
-                            </p>
-                            <div class="menu-6-price bg-meat">
-                                <h5 class="h6-xs yellow-color">
-                                    Rp30.000
-                                </h5>
-                            </div>
-                            <div class="add-to-cart bg-yellow ico-10">
-                                <a href="#">
-                                    <span class="flaticon-shopping-bag"></span>
-                                    Keranjang
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-3">
-                    <div class="menu-6-item bg-white">
-                        <div class="menu-6-img rel">
-                            <div class="hover-overlay">
-                                <img class="img-fluid" src="{{ asset('files/images/produk-koi.png') }}"
-                                    alt="menu-image" />
-                                <span class="item-code bg-tra-dark">Code: 6464</span>
-                                <div class="menu-img-zoom ico-25">
-                                    <a href="{{ asset('files/images/produk-koi.png') }}" class="image-link">
-                                        <span class="flaticon-zoom"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="menu-6-txt rel">
-                            {{-- <div class="item-rating">
-                                <div class="stars-rating stars-lg">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                            </div> --}}
-
-                            <div class="like-ico ico-25">
-                                <a href="#">
-                                    <span class="flaticon-heart"></span>
-                                </a>
-                            </div>
-                            <h5 class="h5-sm">
-                                Koi kohaku
-                            </h5>
-                            <!-- Description -->
-                            <p class="grey-color">
-                                Chicken breast, chilli sauce, tomatoes, pickles, coleslaw
-                            </p>
-                            <div class="menu-6-price bg-meat">
-                                <h5 class="h6-xs yellow-color">
-                                    Rp30.000
-                                </h5>
-                            </div>
-                            <div class="add-to-cart bg-yellow ico-10">
-                                <a href="#">
-                                    <span class="flaticon-shopping-bag"></span>
-                                    Keranjang
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-3">
-                    <div class="menu-6-item bg-white">
-                        <div class="menu-6-img rel">
-                            <div class="hover-overlay">
-                                <img class="img-fluid" src="{{ asset('files/images/produk-koi.png') }}"
-                                    alt="menu-image" />
-                                <span class="item-code bg-tra-dark">Code: 6464</span>
-                                <div class="menu-img-zoom ico-25">
-                                    <a href="{{ asset('files/images/produk-koi.png') }}" class="image-link">
-                                        <span class="flaticon-zoom"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="menu-6-txt rel">
-                            {{-- <div class="item-rating">
-                                <div class="stars-rating stars-lg">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                            </div> --}}
-
-                            <div class="like-ico ico-25">
-                                <a href="#">
-                                    <span class="flaticon-heart"></span>
-                                </a>
-                            </div>
-                            <h5 class="h5-sm">
-                                Koi kohaku
-                            </h5>
-                            <!-- Description -->
-                            <p class="grey-color">
-                                Chicken breast, chilli sauce, tomatoes, pickles, coleslaw
-                            </p>
-                            <div class="menu-6-price bg-meat">
-                                <h5 class="h6-xs yellow-color">
-                                    Rp30.000
-                                </h5>
-                            </div>
-                            <div class="add-to-cart bg-yellow ico-10">
-                                <a href="#">
-                                    <span class="flaticon-shopping-bag"></span>
-                                    Keranjang
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @else
+                    <p>Tidak Ada Produk.</p>
+                @endif
             </div>
         </div>
     </section>
@@ -847,4 +483,62 @@
             </div>
         </div> <!-- End container -->
     </section> <!-- END ABOUT-7 -->
+    @push('script')
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                let cart = [];
+
+                document.addEventListener('click', function(e) {
+                    const btn = e.target.closest('.btn-cart-add-1');
+                    if (btn) {
+                        e.preventDefault();
+
+                        const produk = {
+                            id: btn.dataset.id,
+                            nama: btn.dataset.nama,
+                            harga: parseInt(btn.dataset.harga),
+                            gambar: btn.dataset.gambar
+                        };
+
+                        if (!cart.find(item => item.id === produk.id)) {
+                            cart.push(produk);
+                        }
+
+                        updateCartUI();
+                    }
+                });
+
+                function updateCartUI() {
+                    const cartCount = document.getElementById('cart-count');
+                    const cartList = document.getElementById('cart-list');
+
+                    cartCount.textContent = cart.length;
+                    cartList.innerHTML = '';
+
+                    if (cart.length === 0) {
+                        cartList.innerHTML = '<li>Keranjang masih kosong</li>';
+                        return;
+                    }
+
+                    cart.forEach(item => {
+                        cartList.innerHTML += `
+                <li style="margin-bottom:8px; display:flex; align-items:center;">
+                    <img src="${item.gambar}" width="40" style="margin-right:5px;">
+                    <div>
+                        ${item.nama}<br>
+                        <small>Rp ${new Intl.NumberFormat('id-ID').format(item.harga)}</small>
+                    </div>
+                </li>
+            `;
+                    });
+                }
+
+                document.getElementById('cart-toggle').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const dropdown = document.getElementById('cart-dropdown');
+                    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+                });
+            });
+        </script>
+    @endpush
 @endsection

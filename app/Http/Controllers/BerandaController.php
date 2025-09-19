@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class BerandaController extends Controller
 {
@@ -11,7 +12,11 @@ class BerandaController extends Controller
      */
     public function index()
     {
-        return view('beranda.index');
+        $response = Http::get('http://127.0.0.1:7000/api/products');
+
+        $produk = $response->successful() ? $response->json() : [];
+     
+        return view('beranda.index', compact('produk'));
     }
 
     /**

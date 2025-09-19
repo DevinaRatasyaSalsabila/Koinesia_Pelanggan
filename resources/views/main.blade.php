@@ -200,13 +200,23 @@
                             <a href="tel:0859348539">08459348594</a>
                         </li>
 
-                        <!-- BASKET ICON -->
                         <li class="basket-ico ico-30">
-                            <a href="cart.html">
-                                <span class="ico-holder"><span class="flaticon-shopping-bag"></span>
-                                    <em class="roundpoint"></em></span>
+                            <a href="javascript:void(0)" id="cart-toggle">
+                                <span class="ico-holder">
+                                    <span class="flaticon-shopping-bag"></span>
+                                    <em class="roundpoint" id="cart-count">0</em>
+                                </span>
                             </a>
+
+                            <div id="cart-dropdown"
+                                style="display:none; position:absolute; right:0; background:#fff; border:1px solid #ccc; padding:10px; width:250px; z-index:999;">
+                                <h6>Keranjang</h6>
+                                <ul id="cart-list">
+                                    <li>Keranjang masih kosong</li>
+                                </ul>
+                            </div>
                         </li>
+
                     </ul>
                 </nav>
                 <!-- END MAIN MENU -->
@@ -330,6 +340,7 @@
 
 
     <!-- EXTERNAL SCRIPTS
+        @stack('script')
   ============================================= -->
     <script src="{{ asset('files/js/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('files/js/bootstrap.min.js') }}"></script>
@@ -351,6 +362,7 @@
 
     <!-- Custom Script -->
     <script src="{{ asset('files/js/custom.js') }}"></script>
+
 
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
