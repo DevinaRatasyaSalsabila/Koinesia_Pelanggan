@@ -22,7 +22,7 @@
     </section> --}}
 
     <!-- HERO-4
-                                                                                                                   ============================================= -->
+                                                                                                                                       ============================================= -->
     <section id="hero-4" class="bg-fixed hero-section division">
         <div class="container">
             <div class="row d-flex align-items-center">
@@ -32,7 +32,8 @@
                 <div class="col-md-7">
                     <div class="hero-4-img text-center">
 
-                        <img class="img-fluid" src="{{ asset('files/images/koi-about.png') }}" alt="hero-image">
+                        <img class="img-fluid" src="{{ asset('files/images/koi-about.png') }}"
+                            alt="hero-image">
 
                         <!-- Price Badge -->
                         <div class="price-badge-md bg-fixed 1white-color">
@@ -56,7 +57,8 @@
 
                         <!-- Text -->
                         <p class="p-md">
-                            Nikmati koleksi koi terbaik dengan warna memukau, sehat, dan dirawat dengan penuh
+                            Nikmati koleksi koi terbaik dengan warna memukau, sehat, dan dirawat dengan
+                            penuh
                             ketelatenan.
                         </p>
 
@@ -78,7 +80,8 @@
             <div class="row d-flex align-items-center">
                 <div class="col-md-5 col-lg-6">
                     <div class="about-3-img text-center mb-40">
-                        <img class="img-fluid" src="{{ asset('files/images/about-8.png') }}" alt="about-image">
+                        <img class="img-fluid" src="{{ asset('files/images/about-8.png') }}"
+                            alt="about-image">
                     </div>
                 </div>
 
@@ -86,9 +89,12 @@
                     <div class="about-3-txt mb-40">
                         <h2 class="h2-sm">Tentang Kami – Azza Koi Farm</h2>
                         <p class="p-md grey-color">
-                            Azza Koi Farm adalah tempat budidaya koi yang berfokus pada kualitas, kesehatan, dan keindahan
-                            setiap ekor ikan. Kami percaya bahwa koi bukan hanya sekadar ikan hias, tetapi juga simbol
-                            ketenangan, keberuntungan, dan seni alami yang menambah nilai estetika pada kolam Anda.
+                            Azza Koi Farm adalah tempat budidaya koi yang berfokus pada kualitas,
+                            kesehatan, dan keindahan
+                            setiap ekor ikan. Kami percaya bahwa koi bukan hanya sekadar ikan hias,
+                            tetapi juga simbol
+                            ketenangan, keberuntungan, dan seni alami yang menambah nilai estetika pada
+                            kolam Anda.
                         </p>
                         <div class="abox-2-wrapper ico-70">
                             <div class="row text-center">
@@ -147,7 +153,8 @@
                     Produk Kami
                 </h3>
                 <p class="p-md grey-color">
-                    Kami menghadirkan pilihan produk yang beragam, terpercaya, dan sesuai dengan kebutuhan Anda.
+                    Kami menghadirkan pilihan produk yang beragam, terpercaya, dan sesuai dengan
+                    kebutuhan Anda.
                 </p>
             </div>
             <div class="row">
@@ -157,8 +164,10 @@
                             <div class="menu-6-item bg-white">
                                 <div class="menu-6-img rel">
                                     <div class="hover-overlay">
-                                        <img class="img-fluid" src="{{ $prod['gambar_url'] }}" alt="menu-image" />
-                                        <span class="item-code bg-tra-dark">Kode: {{ $prod['kode_produk'] }}</span>
+                                        <img class="img-fluid" src="{{ $prod['gambar_url'] }}"
+                                            alt="menu-image" />
+                                        <span class="item-code bg-tra-dark">Kode:
+                                            {{ $prod['kode_produk'] }}</span>
                                         <div class="menu-img-zoom ico-25">
                                             <a href="{{ $prod['gambar_url'] }}" class="image-link">
                                                 <span class="flaticon-zoom"></span>
@@ -186,14 +195,16 @@
 
                                         </h5>
                                     </div>
-                                    <div class="add-to-cart bg-yellow ico-10">
-                                        <button type="button" class="btn-cart-add-1" data-id="{{ $prod['kode_produk'] }}"
-                                            data-nama="{{ $prod['nama_produk'] }}" data-harga="{{ $prod['harga_Satuan'] }}"
+                                    {{-- <div class="add-to-cart bg-yellow ico-10"> --}}
+                                        <button type="button" class="btn-cart-add-1"
+                                            data-id="{{ $prod['kode_produk'] }}"
+                                            data-nama="{{ $prod['nama_produk'] }}"
+                                            data-harga="{{ $prod['harga_Satuan'] }}"
                                             data-gambar="{{ $prod['gambar_url'] }}">
                                             <span class="flaticon-shopping-bag"></span>
                                             Keranjang
                                         </button>
-                                    </div>
+                                    {{-- </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -225,12 +236,15 @@
                                 <div class="review-1-txt">
 
                                     <!-- Testimonial Author Avatar -->
-                                    <img src="{{ asset('files/images/review-author-1.jpg') }}" alt="testimonial-avatar">
+                                    <img src="{{ asset('files/images/review-author-1.jpg') }}"
+                                        alt="testimonial-avatar">
 
                                     <!-- Text -->
-                                    <p>" Etiam sapien sem at sagittis congue augue massa varius sodales sapien undo tempus
+                                    <p>" Etiam sapien sem at sagittis congue augue massa varius sodales
+                                        sapien undo tempus
                                         dolor
-                                        egestas magna suscipit magna tempus aliquet porta sodales augue suscipit luctus
+                                        egestas magna suscipit magna tempus aliquet porta sodales augue
+                                        suscipit luctus
                                         neque "
                                     </p>
 
@@ -257,12 +271,15 @@
                                 <div class="review-1-txt">
 
                                     <!-- Testimonial Author Avatar -->
-                                    <img src="{{ asset('files/images/review-author-2.jpg') }}" alt="testimonial-avatar">
+                                    <img src="{{ asset('files/images/review-author-2.jpg') }}"
+                                        alt="testimonial-avatar">
 
                                     <!-- Text -->
-                                    <p>" At sagittis congue augue egestas egestas magna ipsum vitae purus ipsum primis in
+                                    <p>" At sagittis congue augue egestas egestas magna ipsum vitae
+                                        purus ipsum primis in
                                         cubilia
-                                        laoreet augue egestas luctus donec diam ociis nullam tempor sapien, eget orci
+                                        laoreet augue egestas luctus donec diam ociis nullam tempor
+                                        sapien, eget orci
                                         gravida porta "
                                     </p>
 
@@ -290,12 +307,15 @@
                                 <div class="review-1-txt">
 
                                     <!-- Testimonial Author Avatar -->
-                                    <img src="{{ asset('files/images/review-author-3.jpg') }}" alt="testimonial-avatar">
+                                    <img src="{{ asset('files/images/review-author-3.jpg') }}"
+                                        alt="testimonial-avatar">
 
                                     <!-- Text -->
-                                    <p>" Mauris donec ociis et magnis sapien etiam sapien sem sagittis congue augue. An orci
+                                    <p>" Mauris donec ociis et magnis sapien etiam sapien sem sagittis
+                                        congue augue. An orci
                                         nullam
-                                        tempor sapien, eget orci gravida donec enim ipsum porta justo integer at odio velna
+                                        tempor sapien, eget orci gravida donec enim ipsum porta justo
+                                        integer at odio velna
                                         auctor "
                                     </p>
 
@@ -333,7 +353,8 @@
                 <!-- Kolom Kiri -->
                 <div class="col-md-6">
                     <h3 class="fw-bold meat-color mb-3">Informasi Kontak Kami</h3>
-                    <p>Hubungi kami dengan mudah melalui Informasi Kontak Kami yang mencakup alamat, telepon, dan jam
+                    <p>Hubungi kami dengan mudah melalui Informasi Kontak Kami yang mencakup alamat,
+                        telepon, dan jam
                         operasional.</p>
 
                     <!-- Alamat -->
@@ -343,7 +364,8 @@
                                 style="background-color:#a0522d;"></i>
                             <div>
                                 <h5 class="fw-bold mb-1">Alamat</h5>
-                                <p class="mb-0">Ruko Niaga 3 Kavling 3<br>Jl. Kalimantan Sananwetan Kota Blitar</p>
+                                <p class="mb-0">Ruko Niaga 3 Kavling 3<br>Jl. Kalimantan Sananwetan
+                                    Kota Blitar</p>
                             </div>
                         </div>
                     </div>
@@ -355,7 +377,8 @@
                                 style="background-color:#a0522d;"></i>
                             <div>
                                 <h5 class="fw-bold mb-1">Kontak</h5>
-                                <p class="mb-0">WhatsApp: +62 82 142 222 142<br>Instagram: @arrebeautybar</p>
+                                <p class="mb-0">WhatsApp: +62 82 142 222 142<br>Instagram:
+                                    @arrebeautybar</p>
                             </div>
                         </div>
                     </div>
@@ -377,8 +400,8 @@
                 <div class="col-md-6">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.9320477314495!2d112.32966517412606!3d-8.108401881120022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7895dae64834b5%3A0xfd3f89b1af065dcc!2sBasecamp%20Aza%20Koi%20Farms!5e0!3m2!1sid!2sid!4v1758073424053!5m2!1sid!2sid"
-                        width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        width="100%" height="400" style="border:0;" allowfullscreen=""
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
             </div>
@@ -394,7 +417,8 @@
                 <div class="accordion container my-5" id="faqAccordion">
 
                     <!-- 6 -->
-                    <div class="accordion-item" style="background-color: transparent; border: 1px solid #fff;">
+                    <div class="accordion-item"
+                        style="background-color: transparent; border: 1px solid #fff;">
                         <h2 class="accordion-header" id="headingSix">
                             <button class="accordion-button collapsed text-white" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#faq6"
@@ -402,16 +426,19 @@
                                 Berapa biaya ongkir untuk pembelian ikan koi?
                             </button>
                         </h2>
-                        <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div id="faq6" class="accordion-collapse collapse"
+                            data-bs-parent="#faqAccordion">
                             <div class="accordion-body text-white">
-                                Ongkir bervariasi tergantung lokasi dan jumlah pembelian. Estimasi ongkir akan muncul
+                                Ongkir bervariasi tergantung lokasi dan jumlah pembelian. Estimasi
+                                ongkir akan muncul
                                 saat checkout, atau bisa hubungi admin untuk detail lebih lanjut.
                             </div>
                         </div>
                     </div>
 
                     <!-- 7 -->
-                    <div class="accordion-item" style="background-color: transparent; border: 1px solid #fff;">
+                    <div class="accordion-item"
+                        style="background-color: transparent; border: 1px solid #fff;">
                         <h2 class="accordion-header" id="headingSeven">
                             <button class="accordion-button collapsed text-white" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#faq7"
@@ -419,16 +446,19 @@
                                 Apakah bisa request ukuran atau jenis koi tertentu?
                             </button>
                         </h2>
-                        <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div id="faq7" class="accordion-collapse collapse"
+                            data-bs-parent="#faqAccordion">
                             <div class="accordion-body text-white">
-                                Bisa. Silakan hubungi kami melalui WhatsApp atau form kontak, kami akan cek ketersediaan
+                                Bisa. Silakan hubungi kami melalui WhatsApp atau form kontak, kami akan
+                                cek ketersediaan
                                 stok sesuai permintaan Anda.
                             </div>
                         </div>
                     </div>
 
                     <!-- 8 -->
-                    <div class="accordion-item" style="background-color: transparent; border: 1px solid #fff;">
+                    <div class="accordion-item"
+                        style="background-color: transparent; border: 1px solid #fff;">
                         <h2 class="accordion-header" id="headingEight">
                             <button class="accordion-button collapsed text-white" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#faq8"
@@ -436,16 +466,19 @@
                                 Apakah ada perawatan khusus setelah koi sampai di rumah?
                             </button>
                         </h2>
-                        <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div id="faq8" class="accordion-collapse collapse"
+                            data-bs-parent="#faqAccordion">
                             <div class="accordion-body text-white">
-                                Ya. Biarkan koi beradaptasi dengan air baru terlebih dahulu (proses aklimatisasi sekitar
+                                Ya. Biarkan koi beradaptasi dengan air baru terlebih dahulu (proses
+                                aklimatisasi sekitar
                                 15–30 menit) sebelum dilepas ke kolam.
                             </div>
                         </div>
                     </div>
 
                     <!-- 9 -->
-                    <div class="accordion-item" style="background-color: transparent; border: 1px solid #fff;">
+                    <div class="accordion-item"
+                        style="background-color: transparent; border: 1px solid #fff;">
                         <h2 class="accordion-header" id="headingNine">
                             <button class="accordion-button collapsed text-white" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#faq9"
@@ -453,16 +486,19 @@
                                 Apakah ada diskon untuk pembelian dalam jumlah banyak (grosir)?
                             </button>
                         </h2>
-                        <div id="faq9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div id="faq9" class="accordion-collapse collapse"
+                            data-bs-parent="#faqAccordion">
                             <div class="accordion-body text-white">
-                                Ada. Untuk pembelian dalam jumlah besar, silakan hubungi admin untuk mendapatkan harga
+                                Ada. Untuk pembelian dalam jumlah besar, silakan hubungi admin untuk
+                                mendapatkan harga
                                 spesial.
                             </div>
                         </div>
                     </div>
 
                     <!-- 10 -->
-                    <div class="accordion-item" style="background-color: transparent; border: 1px solid #fff;">
+                    <div class="accordion-item"
+                        style="background-color: transparent; border: 1px solid #fff;">
                         <h2 class="accordion-header" id="headingTen">
                             <button class="accordion-button collapsed text-white" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#faq10"
@@ -470,9 +506,11 @@
                                 Apakah bisa datang langsung ke tempat untuk melihat koi?
                             </button>
                         </h2>
-                        <div id="faq10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div id="faq10" class="accordion-collapse collapse"
+                            data-bs-parent="#faqAccordion">
                             <div class="accordion-body text-white">
-                                Bisa, tentu saja. Kami juga melayani kunjungan langsung ke farm/kolam dengan perjanjian
+                                Bisa, tentu saja. Kami juga melayani kunjungan langsung ke farm/kolam
+                                dengan perjanjian
                                 terlebih dahulu.
                             </div>
                         </div>
@@ -486,58 +524,49 @@
     @push('script')
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                let cart = [];
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-                document.addEventListener('click', function(e) {
-                    const btn = e.target.closest('.btn-cart-add-1');
-                    if (btn) {
+                const buttons = document.querySelectorAll(".btn-cart-add-1");
+                console.log("Jumlah tombol keranjang ketemu:", buttons.length);
+
+                buttons.forEach(btn => {
+                    btn.addEventListener("click", function(e) {
                         e.preventDefault();
+                        console.log("✅ Tombol keranjang diklik!");
 
                         const produk = {
-                            id: btn.dataset.id,
-                            nama: btn.dataset.nama,
-                            harga: parseInt(btn.dataset.harga),
-                            gambar: btn.dataset.gambar
+                            id: this.dataset.id,
+                            nama: this.dataset.nama,
+                            harga: parseInt(this.dataset.harga),
+                            gambar: this.dataset.gambar,
+                            qty: 1
                         };
+
+                        console.log("Data produk:", produk);
 
                         if (!cart.find(item => item.id === produk.id)) {
                             cart.push(produk);
+                            console.log("Produk baru ditambahkan ke cart:", produk);
+                        } else {
+                            console.log(
+                                "Produk sudah ada di cart, tidak ditambahkan lagi."
+                                );
                         }
 
+                        localStorage.setItem("cart", JSON.stringify(cart));
                         updateCartUI();
-                    }
+                    });
                 });
 
                 function updateCartUI() {
                     const cartCount = document.getElementById('cart-count');
-                    const cartList = document.getElementById('cart-list');
-
-                    cartCount.textContent = cart.length;
-                    cartList.innerHTML = '';
-
-                    if (cart.length === 0) {
-                        cartList.innerHTML = '<li>Keranjang masih kosong</li>';
-                        return;
+                    if (cartCount) {
+                        cartCount.textContent = cart.length;
+                        console.log("Jumlah produk di cart sekarang:", cart.length);
                     }
-
-                    cart.forEach(item => {
-                        cartList.innerHTML += `
-                <li style="margin-bottom:8px; display:flex; align-items:center;">
-                    <img src="${item.gambar}" width="40" style="margin-right:5px;">
-                    <div>
-                        ${item.nama}<br>
-                        <small>Rp ${new Intl.NumberFormat('id-ID').format(item.harga)}</small>
-                    </div>
-                </li>
-            `;
-                    });
                 }
 
-                document.getElementById('cart-toggle').addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const dropdown = document.getElementById('cart-dropdown');
-                    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-                });
+                updateCartUI();
             });
         </script>
     @endpush

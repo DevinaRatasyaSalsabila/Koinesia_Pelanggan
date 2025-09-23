@@ -9,4 +9,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
-Route::get('/pesanan/format', [FormatController::class, 'index'])->name('pesananFormat');
+Route::get('/cart', [FormatController::class, 'index'])->name('pesananFormat');

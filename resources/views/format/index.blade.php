@@ -29,7 +29,6 @@
             </div>
         </div>
     </div>
-
     <section id="cart-1" class="wide-100 cart-page division">
         <div class="container">
             <div class="row">
@@ -45,54 +44,26 @@
                                     <th scope="col" class="text-end">Hapus</th>
                                 </tr>
                             </thead>
-
                             <tbody>
-                                <tr>
-                                    <td data-label="Product" class="product-name">
-                                        <div class="cart-product-desc">
-                                            <h5 class="h5-sm">Koi Ukuran 9</h5>
-                                            <p class="p-sm">
-                                                Dengan kwalitas terjamin dan terpecaya
-                                            </p>
-                                        </div>
-
-                                    </td>
-                                    <td data-label="Price" class="product-price">
-                                        <h5 class="h5-md">
-                                            Rp80.095
-                                        </h5>
-                                    </td>
-                                    <td data-label="Quantity" class="product-qty">
-                                        <input class="qty" type="number" min="1" max="20" value="1">
-                                    </td>
-                                    <td data-label="Total" class="product-price-total">
-                                        <h5 class="h5-md text-end">
-                                            Rp80.095
-                                        </h5>
-                                    </td>
-                                    <td data-label="Delete" class="td-trash text-end">
-                                        <i class="far fa-trash-alt"></i>
-                                    </td>
-                                </tr>
+                                <!-- Isi keranjang akan diisi lewat JS -->
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
 
+            <!-- Total Keseluruhan -->
             <table>
                 <thead>
                     <tr>
                         <td colspan="3"></td>
                         <td>
                             <h5 class="h5-md meat-color text-end">
-                                Total Keseluruhan : 
+                                Total Keseluruhan :
                             </h5>
                         </td>
                         <td colspan="2" class="product-price-total-keseluruhan">
-                            <h5 class="h5-md text-center">
-                                Rp80.095
-                            </h5>
+                            <h5 class="h5-md text-center">Rp 0</h5>
                         </td>
                     </tr>
                     <tr>
@@ -107,4 +78,79 @@
             </table>
         </div>
     </section>
+
+    @push('script')
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                const tbody = document.querySelector("#myTable tbody");
+                const totalKeseluruhanEl = document.querySelector(
+                    ".product-price-total-keseluruhan h5");
+
+                tbody.innerHTML = "";
+                let totalKeseluruhan = 0;
+
+                if (cart.length === 0) {
+                    tbody.innerHTML =
+                        "<tr><td colspan='5' class='text-center'>Keranjang kosong</td></tr>";
+                } else {
+                    cart.forEach((item, index) => {
+                        let total = item.harga * item.qty;
+                        totalKeseluruhan += total;
+
+                        tbody.innerHTML += `
+                <tr>
+                    <td data-label="Produk" class="product-name">
+                        <div class="cart-product-desc d-flex align-items-center">
+                            <img src="${item.gambar}" width="60" style="margin-right:10px; border-radius:6px;">
+                            <div>
+                                <h5 class="h5-sm mb-1">${item.nama}</h5>
+                                <p class="p-sm text-muted">Kode: ${item.id}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td data-label="Harga" class="product-price">
+                        <h5 class="h5-md">Rp ${new Intl.NumberFormat('id-ID').format(item.harga)}</h5>
+                    </td>
+                    <td data-label="Item" class="product-qty">
+                        <input class="qty-input" type="number" min="1" value="${item.qty}" data-index="${index}">
+                    </td>
+                    <td data-label="Total" class="product-price-total text-end">
+                        <h5 class="h5-md">Rp ${new Intl.NumberFormat('id-ID').format(total)}</h5>
+                    </td>
+                    <td data-label="Hapus" class="td-trash text-end">
+                        <button class="hapus-btn btn btn-sm btn-danger" data-index="${index}">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+                    });
+                }
+
+                totalKeseluruhanEl.textContent = "Rp " + new Intl.NumberFormat('id-ID').format(
+                    totalKeseluruhan);
+
+                // hapus produk
+                document.querySelectorAll(".hapus-btn").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        let index = btn.dataset.index;
+                        cart.splice(index, 1);
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        location.reload();
+                    });
+                });
+
+                // ubah qty
+                document.querySelectorAll(".qty-input").forEach(input => {
+                    input.addEventListener("change", () => {
+                        let index = input.dataset.index;
+                        cart[index].qty = parseInt(input.value);
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        location.reload();
+                    });
+                });
+            });
+        </script>
+    @endpush
 @endsection
