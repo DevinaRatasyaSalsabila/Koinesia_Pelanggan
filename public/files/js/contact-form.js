@@ -38,7 +38,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             data: dataString,
-            url: "php/contactForm.php",
+            // url: "php/contactForm.php",
             cache: false,
             success: function (d) {
                 $(".form-control").removeClass("success");
@@ -53,7 +53,7 @@ $(document).ready(function() {
     $("#reset").on('click', function() {
         $(".form-control").removeClass("success").removeClass("error");
     });
-    
+
 })
 
 

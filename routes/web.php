@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('main');
 // });
 
-Route::get('/', [PelangganController::class, 'beranda'])->name('beranda'); 
+Route::get('/', [PelangganController::class, 'beranda'])->name('beranda');
 Route::get('/keranjang', [PelangganController::class, 'keranjang'])->name('keranjang');
 Route::get('/keranjang/pesanan', [PelangganController::class, 'format'])->name('format');
 // Route::get('/produk', [PelangganController::class, 'produkLengkap'])->name('produkLengkap');
+Route::post('/pesanan/kirim', [PelangganController::class, 'kirim'])->name('pesanan.kirim');

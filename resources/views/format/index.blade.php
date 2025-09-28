@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
-                    <div class="hero-txt text-center white-color">
+                    <div class="text-center hero-txt white-color">
                         <div id="breadcrumb">
                             <div class="row">
                                 <div class="col">
@@ -30,37 +30,44 @@
         </div>
     </div>
 
-    <section class="wide-100 cart-page division">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2">
-                    <div class="card mt-5 bg-meat text-light">
-                        <div class="card-body">
-                            <p>
-                                <i class="bi bi-info-circle-fill"></i>
-                                Semua pesanan akan diproses berdasarkan urutan antrian. Kami berkomitmen memproses dan
-                                mengirimkan pesanan secepat mungkin sesuai jadwal yang telah ditetapkan.
-                            </p>
+    {{-- <pre>Action: {{ route('pesanan.kirim') }}</pre> --}}
+
+    <form action="/pesanan/kirim" method="POST" class="row">
+        @csrf
+        <section class="wide-100 cart-page division">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="mt-5 card bg-meat text-light">
+                            <div class="card-body">
+                                <p>
+                                    <i class="bi bi-info-circle-fill"></i>
+                                    Semua pesanan akan diproses berdasarkan urutan antrian. Kami berkomitmen memproses dan
+                                    mengirimkan pesanan secepat mungkin sesuai jadwal yang telah ditetapkan.
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-10">
-                    <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="form-holder">
-                                    <form name="contactform" class="row contact-form">
+                    <div class="col-lg-10">
+                        <div class="p-3 mb-5 rounded shadow bg-body-tertiary">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-holder">
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-6">
+                                                <label for="">Nama Penerima</label>
+                                                <input type="text" name="nama_penerima" class="form-control "
+                                                    placeholder="Masukkan Nama Penerima">
+                                            </div>
 
-                                        <div class="col-md-12 col-lg-6">
-                                            <label for="">Nama Penerima</label>
-                                            <input type="text" name="nama_penerima" class="form-control "
-                                                placeholder="Masukkan Nama Penerima">
-                                        </div>
-
-                                        <div class="col-md-12 col-lg-6">
-                                            <label for="">Nomor Telepon</label>
-                                            <input type="number" name="telepon" class="form-control "
-                                                placeholder="Masukkan Nomor Telepon">
+                                            <div class="col-md-12 col-lg-6">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">62</span>
+                                                    <input type="text" class="form-control" placeholder="Username"
+                                                        name="telepon" aria-label="Username"
+                                                        aria-describedby="basic-addon1">
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="col-md-12 col-lg-12">
@@ -68,66 +75,66 @@
                                             <textarea name="alamat" class="form-control " placeholder="Masukkan Alamat Lengkap"></textarea>
                                         </div>
 
-                                        <div class="col-md-12 contact-form-msg text-center">
+                                        <div class="text-center col-md-12">
                                             <div class="sending-msg"><span class="loading"></span></div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <section id="cart-1" class="wide-100 cart-page division">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="cart-table mb-70">
-                            <table id="myTable">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Pilih</th>
-                                        <th scope="col">Produk</th>
-                                        <th scope="col">Harga</th>
-                                        <th scope="col">Item</th>
-                                        <th scope="col" class="text-center">Total</th>
-                                        <th scope="col" class="text-end">Hapus</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- isi keranjang diisi lewat JS -->
-                                </tbody>
-                            </table>
+            <section id="cart-1" class="wide-100 cart-page division">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="cart-table mb-70">
+                                <table id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Pilih</th>
+                                            <th scope="col">Produk</th>
+                                            <th scope="col">Harga</th>
+                                            <th scope="col">Item</th>
+                                            <th scope="col" class="text-center">Total</th>
+                                            <th scope="col" class="text-end">Hapus</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- isi keranjang diisi lewat JS -->
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <td colspan="3"></td>
-                            <td>
-                                <h5 class="h5-md meat-color text-end">Total Keseluruhan :</h5>
-                            </td>
-                            <td colspan="2" class="product-price-total-keseluruhan">
-                                <h5 id="total-harga" class="h5-md text-center">Rp 0</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5" class="text-end">
-                                <a href="{{ route('format') }}" class="btn btn-lg btn-meat ">
-                                    <i class="fa-brands fa-whatsapp"></i>
-                                    Kirim Pesanan
-                                </a>
-                            </td>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td>
+                                    <h5 class="h5-md meat-color text-end">Total Keseluruhan :</h5>
+                                </td>
+                                <td colspan="2" class="product-price-total-keseluruhan">
+                                    <h5 id="total-harga" class="text-center h5-md">Rp 0</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-end">
+                                    <button type="submit" class="btn btn-lg btn-meat ">
+                                        <i class="fa-brands fa-whatsapp"></i>
+                                        Kirim Pesanan
+                                    </button>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </section>
         </section>
-    </section>
+    </form>
 
     @push('script')
         <script>
@@ -158,7 +165,7 @@
                                     <div class="cart-product-desc d-flex align-items-center">
                                         <img src="${item.gambar}" width="60" style="margin-right:10px; border-radius:6px;">
                                         <div>
-                                            <h5 class="h5-sm mb-1">${item.nama}</h5>
+                                            <h5 class="mb-1 h5-sm">${item.nama}</h5>
                                             <p class="p-sm text-muted">Kode: ${item.id}</p>
                                         </div>
                                     </div>
