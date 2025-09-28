@@ -275,15 +275,15 @@
                     <div class="col-md-7 col-lg-4 col-xl-5">
                         <div class="footer-contacts">
 
-                            <!-- Address -->
-                            <p class="p-xl mt-10">Los Angeles,</p>
-                            <p class="p-xl">8721 M Central Avenue, CA 90036</p>
+                            {{-- <!-- Address -->
+                            <p class="p-xl mt-10">Los Angeles,</p> --}}
+                            <p class="p-xl">Lingkungan Klemunan, Klemunan, Kec. Wlingi, Kabupaten Blitar, Jawa Timur 66184</p>
 
-                            <!-- Contacts -->
+                            {{-- <!-- Contacts -->
                             <p class="p-lg foo-email">Email: <a
-                                    href="mailto:yourdomain@mail.com">hello@yourdomain.com</a></p>
+                                    href="mailto:yourdomain@mail.com">hello@yourdomain.com</a></p> --}}
                             <p class="p-lg">Call Now: <span class="yellow-color"><a
-                                        href="tel:123456789">789-654-3210</a></span></p>
+                                        href="tel:081515725525">081515725525</a></span></p>
 
                         </div>
                     </div>
