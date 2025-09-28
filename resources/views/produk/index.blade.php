@@ -1,5 +1,5 @@
-@extends('main')
-@section('content')
+{{-- @extends('main')
+@section('content') --}}
     <section id="menu-6" class="wide-70 menu-section division">
         <div class="container">
             <div class="text-center">
@@ -70,4 +70,4 @@
             </div>
         </div>
     </section>
-@endsection
+{{-- @endsection --}}
