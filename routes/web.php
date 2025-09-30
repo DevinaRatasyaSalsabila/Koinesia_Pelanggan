@@ -14,3 +14,5 @@ Route::get('/keranjang', [PelangganController::class, 'keranjang'])->name('keran
 Route::get('/keranjang/pesanan', [PelangganController::class, 'format'])->name('format');
 // Route::get('/produk', [PelangganController::class, 'produkLengkap'])->name('produkLengkap');
 Route::post('/pesanan/kirim', [PelangganController::class, 'kirim'])->name('pesanan.kirim');
+
+Route::get('/service/start', [PelangganController::class, 'startService'])->name('service.start');

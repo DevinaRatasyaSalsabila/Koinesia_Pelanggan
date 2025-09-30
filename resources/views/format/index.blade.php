@@ -30,7 +30,10 @@
         </div>
     </div>
 
-    {{-- <pre>Action: {{ route('pesanan.kirim') }}</pre> --}}
+    <a href="{{ route('service.start') }}" class="btn btn-success">
+        🔄 Start WhatsApp Service
+    </a>
+
 
     <form action="/pesanan/kirim" method="POST" class="row">
         @csrf
@@ -61,7 +64,7 @@
                                             </div>
 
                                             <div class="col-md-12 col-lg-6">
-                                                <div class="input-group mb-3">
+                                                <div class="mb-3 input-group">
                                                     <span class="input-group-text" id="basic-addon1">62</span>
                                                     <input type="text" class="form-control" placeholder="Username"
                                                         name="telepon" aria-label="Username"
@@ -171,7 +174,7 @@
                                     </div>
                                 </td>
                                 <td><h5>Rp ${new Intl.NumberFormat('id-ID').format(item.harga)}</h5></td>
-                                <td><h5>${item.qty}</h5></td>
+                                <td><h5>${item.qty} Stok = ${item.stok}</h5></td>
                                 <td><h5>Rp ${new Intl.NumberFormat('id-ID').format(total)}</h5></td>
                                 <td class="text-end">
                                     <button class="hapus-btn btn btn-sm btn-outline-danger" data-index="${index}">
@@ -185,7 +188,6 @@
 
                     totalKeseluruhanEl.textContent = "Rp " + new Intl.NumberFormat('id-ID').format(totalKeseluruhan);
 
-                    // Event listener untuk hapus
                     document.querySelectorAll(".hapus-btn").forEach(btn => {
                         btn.addEventListener("click", e => {
                             let idx = e.currentTarget.getAttribute("data-index");
@@ -195,7 +197,6 @@
                         });
                     });
 
-                    // Event listener untuk checkbox
                     document.querySelectorAll(".pilih-checkbox").forEach(checkbox => {
                         checkbox.addEventListener("change", e => {
                             let idx = e.currentTarget.getAttribute("data-index");
@@ -207,6 +208,33 @@
                 }
 
                 renderTable();
+            });
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const form = document.querySelector("form");
+                form.addEventListener("submit", function(e) {
+                    let checkout = JSON.parse(localStorage.getItem("checkout")) || [];
+
+                    let dipilih = checkout.filter(item => item.dipilih);
+
+                    document.querySelectorAll(".produk-hidden").forEach(el => el.remove());
+
+                    dipilih.forEach((item, i) => {
+                        let inputId = document.createElement("input");
+                        inputId.type = "hidden";
+                        inputId.name = `produk[${i}][id]`;
+                        inputId.value = item.id;
+                        inputId.classList.add("produk-hidden");
+                        form.appendChild(inputId);
+
+                        let inputQty = document.createElement("input");
+                        inputQty.type = "hidden";
+                        inputQty.name = `produk[${i}][qty]`;
+                        inputQty.value = item.qty;
+                        inputQty.classList.add("produk-hidden");
+                        form.appendChild(inputQty);
+                    });
+                });
             });
         </script>
     @endpush

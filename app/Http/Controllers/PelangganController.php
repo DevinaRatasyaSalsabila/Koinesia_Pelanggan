@@ -37,51 +37,70 @@ class PelangganController extends Controller
         return view('produk.index', compact('produk'));
     }
 
-public function kirim(Request $request)
-{
-    // pastikan nomor buyer rapi (hapus 0 depan, tambah 62)
-    $teleponBuyer = preg_replace('/^0/', '', $request->telepon);
-    $teleponBuyer = "62" . $teleponBuyer;
-
-    // pesan yang dikirim ke admin
-    $pesan = "📦 Pesanan Baru:\n"
-        . "👤 Nama: {$request->nama_penerima}\n"
-        . "📞 Telepon: {$teleponBuyer}\n"
-        . "🏠 Alamat: {$request->alamat}";
-
-    // nomor admin
-    $noAdmin = "6283871992564";
-
-    // kirim WA ke admin
-    $this->apicall($noAdmin, $pesan);
-
-    return back()->with('success', 'Pesanan terkirim ke admin via WhatsApp!');
-}
-
-private function apicall($no_hp, $pesan)
-{
-    $client = new Client();
-    $url = 'https://apiwa.smkpgriwlingi.sch.id/api/sendBulkMessage';
-
-    $data = [
-        'apiKey'  => env('WHAPI_KEY', 'f60d05297f0af62109d4ec9ec274bd32'),
-        'phone'   => [$no_hp],   // kirim ke admin
-        'message' => $pesan,
-        'delay'   => 1,
-    ];
-
-    try {
-        $response = $client->post($url, ['form_params' => $data]);
-        Log::info('WA API response: ' . $response->getBody());
-    } catch (\Exception $e) {
-        Log::error('WA API error: ' . $e->getMessage());
-    }
-}
-
-
-    public function show(string $id)
+    public function kirim(Request $request)
     {
-        //
+        Log::info("Pesanan diterima di pelanggan:", $request->all());
+
+        foreach ($request->produk as $p) {
+            Log::info("Kirim request reduce stock ke admin:", $p);
+
+            $response = Http::put("http://127.0.0.1:8000/api/products/{$p['id']}/reduce-stock", [
+                "qty" => $p['qty']
+            ]);
+
+            Log::info("Response dari admin:", $response->json());
+        }
+
+        return back()->with('success', 'Pesanan terkirim ke admin via WhatsApp!');
+    }
+
+    private function apicall($no_hp, $pesan)
+    {
+        $client = new Client();
+        $url = 'https://apiwa.smkpgriwlingi.sch.id/api/sendBulkMessage';
+
+        $data = [
+            'apiKey'  => env('WHAPI_KEY', 'f60d05297f0af62109d4ec9ec274bd32'),
+            'phone'   => [$no_hp],
+            'message' => $pesan,
+            'delay'   => 1,
+        ];
+
+        try {
+            $response = $client->post($url, ['form_params' => $data]);
+            Log::info('WA API response: ' . $response->getBody());
+        } catch (\Exception $e) {
+            Log::error('WA API error: ' . $e->getMessage());
+        }
+    }
+
+
+    public function startService()
+    {
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://apiwa.smkpgriwlingi.sch.id/api/serviceStart';
+
+        $data = [
+            'apiKey' => env('WHAPI_KEY', 'f60d05297f0af62109d4ec9ec274bd32'),
+        ];
+
+        try {
+            $response = $client->post($url, ['form_params' => $data]);
+            $body = json_decode($response->getBody(), true);
+
+            // log hasil
+            Log::info('Service start response: ' . $response->getBody());
+
+            // kalau sukses, bisa aja redirect sambil kasih pesan
+            if (isset($body['code']) && $body['code'] == 200) {
+                return back()->with('success', 'WA Service berhasil dihidupkan!');
+            }
+
+            return back()->with('error', 'Gagal start service: ' . $response->getBody());
+        } catch (\Exception $e) {
+            Log::error('Error starting WA service: ' . $e->getMessage());
+            return back()->with('error', 'Error: ' . $e->getMessage());
+        }
     }
 
     public function edit(string $id)
