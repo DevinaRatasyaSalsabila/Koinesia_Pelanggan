@@ -30,11 +30,6 @@
         </div>
     </div>
 
-    <a href="{{ route('service.start') }}" class="btn btn-success">
-        🔄 Start WhatsApp Service
-    </a>
-
-
     <form action="/pesanan/kirim" method="POST" class="row">
         @csrf
         <section class="wide-100 cart-page division">
@@ -59,7 +54,7 @@
                                         <div class="row">
                                             <div class="col-md-12 col-lg-6">
                                                 <label for="">Nama Penerima</label>
-                                                <input type="text" name="nama_penerima" class="form-control "
+                                                <input type="text" name="nama_pembeli" class="form-control "
                                                     placeholder="Masukkan Nama Penerima">
                                             </div>
 
