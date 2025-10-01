@@ -30,11 +30,6 @@
         </div>
     </div>
 
-    <a href="{{ route('service.start') }}" class="btn btn-success">
-        🔄 Start WhatsApp Service
-    </a>
-
-
     <form action="/pesanan/kirim" method="POST" class="row">
         @csrf
         <section class="wide-100 cart-page division">
@@ -59,7 +54,7 @@
                                         <div class="row">
                                             <div class="col-md-12 col-lg-6">
                                                 <label for="">Nama Penerima</label>
-                                                <input type="text" name="nama_penerima" class="form-control "
+                                                <input type="text" name="nama_pembeli" class="form-control "
                                                     placeholder="Masukkan Nama Penerima">
                                             </div>
 
@@ -75,7 +70,8 @@
 
                                         <div class="col-md-12 col-lg-12">
                                             <label for="">Alamat Lengkap</label>
-                                            <textarea name="alamat" class="form-control " placeholder="Masukkan Alamat Lengkap"></textarea>
+                                            <textarea name="alamat" class="form-control "
+                                                placeholder="Masukkan Alamat Lengkap"></textarea>
                                         </div>
 
                                         <div class="text-center col-md-12">
@@ -160,29 +156,29 @@
                             }
 
                             tbody.innerHTML += `
-                            <tr>
-                                <td class="text-center">
-                                    <input type="checkbox" class="pilih-checkbox" data-index="${index}" ${item.dipilih ? "checked" : ""}>
-                                </td>
-                                <td>
-                                    <div class="cart-product-desc d-flex align-items-center">
-                                        <img src="${item.gambar}" width="60" style="margin-right:10px; border-radius:6px;">
-                                        <div>
-                                            <h5 class="mb-1 h5-sm">${item.nama}</h5>
-                                            <p class="p-sm text-muted">Kode: ${item.id}</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><h5>Rp ${new Intl.NumberFormat('id-ID').format(item.harga)}</h5></td>
-                                <td><h5>${item.qty} Stok = ${item.stok}</h5></td>
-                                <td><h5>Rp ${new Intl.NumberFormat('id-ID').format(total)}</h5></td>
-                                <td class="text-end">
-                                    <button class="hapus-btn btn btn-sm btn-outline-danger" data-index="${index}">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        `;
+                                    <tr>
+                                        <td class="text-center">
+                                            <input type="checkbox" class="pilih-checkbox" data-index="${index}" ${item.dipilih ? "checked" : ""}>
+                                        </td>
+                                        <td>
+                                            <div class="cart-product-desc d-flex align-items-center">
+                                                <img src="${item.gambar}" width="60" style="margin-right:10px; border-radius:6px;">
+                                                <div>
+                                                    <h5 class="mb-1 h5-sm">${item.nama}</h5>
+                                                    <p class="p-sm text-muted">Kode: ${item.id}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><h5>Rp ${new Intl.NumberFormat('id-ID').format(item.harga)}</h5></td>
+                                        <td><h5>${item.qty} Stok = ${item.stok}</h5></td>
+                                        <td><h5>Rp ${new Intl.NumberFormat('id-ID').format(total)}</h5></td>
+                                        <td class="text-end">
+                                            <button class="hapus-btn btn btn-sm btn-outline-danger" data-index="${index}">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                `;
                         });
                     }
 
@@ -212,7 +208,7 @@
 
             document.addEventListener("DOMContentLoaded", () => {
                 const form = document.querySelector("form");
-                form.addEventListener("submit", function(e) {
+                form.addEventListener("submit", function (e) {
                     let checkout = JSON.parse(localStorage.getItem("checkout")) || [];
 
                     let dipilih = checkout.filter(item => item.dipilih);
@@ -233,6 +229,12 @@
                         inputQty.value = item.qty;
                         inputQty.classList.add("produk-hidden");
                         form.appendChild(inputQty);
+
+                        let inputHarga = document.createElement("input");
+                        inputHarga.type = "hidden";
+                        inputHarga.name = `produk[${i}][harga]`;
+                        inputHarga.value = item.harga;
+                        form.appendChild(inputHarga);
                     });
                 });
             });

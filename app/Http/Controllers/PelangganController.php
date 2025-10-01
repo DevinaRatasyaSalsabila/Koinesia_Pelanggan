@@ -42,17 +42,38 @@ class PelangganController extends Controller
         Log::info("Pesanan diterima di pelanggan:", $request->all());
 
         foreach ($request->produk as $p) {
-            Log::info("Kirim request reduce stock ke admin:", $p);
+            Log::info("Kirim request reduce stock ke admin:", [$p]);
 
             $response = Http::put("http://127.0.0.1:7000/api/products/{$p['id']}/reduce-stock", [
                 "qty" => $p['qty']
             ]);
 
-            Log::info("Response dari admin:", $response->json());
+            if ($response->successful()) {
+                Log::info("Stok berhasil dikurangi:", $response->json());
+
+                $pesananResponse = Http::post("http://127.0.0.1:8000/api/pesanan/API", [
+                    "kode_pesanan" => "PSN-" . time(),
+                    "kode_produk"  => $p['id'],
+                    "jumlah"       => $p['qty'],
+                    "nominal"      => $p['qty'] * $p['harga']
+                ]);
+
+                if ($pesananResponse->successful()) {
+                    Log::info("Pesanan berhasil masuk:", $pesananResponse->json());
+                } else {
+                    Log::error("Gagal insert pesanan:", [
+                        'status' => $pesananResponse->status(),
+                        'body'   => $pesananResponse->body(),
+                    ]);
+                }
+            }
+
+            Log::info("Response dari admin:", ['data' => $response->json()]);
         }
 
         return back()->with('success', 'Pesanan terkirim ke admin via WhatsApp!');
     }
+
 
     private function apicall($no_hp, $pesan)
     {
