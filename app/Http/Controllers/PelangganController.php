@@ -58,15 +58,15 @@ class PelangganController extends Controller
                     "kode_produk"  => $p['id'],
                     "jumlah"       => $p['qty'],
                     "nominal"      => $p['qty'] * $p['harga'],
-                     "nama_pembeli" => $nama_pembeli,
+                    "nama_pembeli" => $nama_pembeli,
                 ]);
 
                 if ($pesananResponse->successful()) {
                     Log::info("Pesanan berhasil masuk:", $pesananResponse->json());
                 } else {
                     Log::error("Gagal insert pesanan:", [
-                        'status' => $pesananResponse->status(),
-                        'body'   => $pesananResponse->body(),
+                        'status' => $pesananResponse->status()
+                        // 'body'   => $pesananResponse->body(),
                     ]);
                 }
             }
