@@ -11,7 +11,7 @@ class PelangganController extends Controller
 {
     public function beranda()
     {
-        $response = Http::get('http://127.0.0.1:8000/api/products');
+        $response = Http::get('http://127.0.0.1:7000/api/products');
 
         $produk = $response->successful() ? $response->json() : [];
         $produk = collect($produk)->sortByDesc('created_at')->take(4);
@@ -31,7 +31,7 @@ class PelangganController extends Controller
 
     public function produkLengkap()
     {
-        $response = Http::get('http://127.0.0.1:8000/api/products');
+        $response = Http::get('http://127.0.0.1:7000/api/products');
 
         $produk = $response->successful() ? $response->json() : [];
         return view('produk.index', compact('produk'));
@@ -44,7 +44,7 @@ class PelangganController extends Controller
         foreach ($request->produk as $p) {
             Log::info("Kirim request reduce stock ke admin:", $p);
 
-            $response = Http::put("http://127.0.0.1:8000/api/products/{$p['id']}/reduce-stock", [
+            $response = Http::put("http://127.0.0.1:7000/api/products/{$p['id']}/reduce-stock", [
                 "qty" => $p['qty']
             ]);
 
