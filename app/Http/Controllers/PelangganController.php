@@ -41,6 +41,8 @@ class PelangganController extends Controller
     {
         Log::info("Pesanan diterima di pelanggan:", $request->all());
 
+        $nama_pembeli = $request->nama_pembeli;
+
         foreach ($request->produk as $p) {
             Log::info("Kirim request reduce stock ke admin:", [$p]);
 
@@ -55,7 +57,8 @@ class PelangganController extends Controller
                     "kode_pesanan" => "PSN-" . time(),
                     "kode_produk"  => $p['id'],
                     "jumlah"       => $p['qty'],
-                    "nominal"      => $p['qty'] * $p['harga']
+                    "nominal"      => $p['qty'] * $p['harga'],
+                     "nama_pembeli" => $nama_pembeli,
                 ]);
 
                 if ($pesananResponse->successful()) {

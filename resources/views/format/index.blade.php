@@ -173,8 +173,8 @@
                                         <td><h5>${item.qty} Stok = ${item.stok}</h5></td>
                                         <td><h5>Rp ${new Intl.NumberFormat('id-ID').format(total)}</h5></td>
                                         <td class="text-end">
-                                            <button class="hapus-btn btn btn-sm btn-outline-danger" data-index="${index}">
-                                                <i class="fas fa-trash-alt"></i>
+                                            <button class="hapus-btn btn btn-sm btn-danger" data-index="${index}">
+                                                <i class="fas fa-trash-alt" style="color: red;></i>
                                             </button>
                                         </td>
                                     </tr>

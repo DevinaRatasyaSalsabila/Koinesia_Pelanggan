@@ -121,8 +121,8 @@
                     <h5 class="h5-md">Rp ${new Intl.NumberFormat('id-ID').format(total)}</h5>
                 </td>
                 <td data-label="Hapus" class="td-trash text-end">
-                    <button class="hapus-btn btn btn-sm btn-danger" data-index="${index}">
-                        <i class="far fa-trash-alt"></i>
+                    <button class="hapus-btn btn btn-sm btn-outline-danger" data-index="${index}">
+                        <i class="far fa-trash-alt" style="color: red;"></i>
                     </button>
                 </td>
             </tr>
