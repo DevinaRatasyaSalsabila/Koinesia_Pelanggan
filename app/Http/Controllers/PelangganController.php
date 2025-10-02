@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class PelangganController extends Controller
 {
@@ -42,7 +44,11 @@ class PelangganController extends Controller
         Log::info("Pesanan diterima di pelanggan:", $request->all());
 
         $nama_pembeli = $request->nama_pembeli;
+        $telepon      = $request->telepon;
+        $alamat       = $request->alamat;
 
+        $kodePesanan = 'PESN-' . date('dm') . '-' . date('Hi') . '-' . Str::upper(Str::random(3));
+        
         foreach ($request->produk as $p) {
             Log::info("Kirim request reduce stock ke admin:", [$p]);
 
@@ -54,11 +60,13 @@ class PelangganController extends Controller
                 Log::info("Stok berhasil dikurangi:", $response->json());
 
                 $pesananResponse = Http::post("http://127.0.0.1:8000/api/pesanan/API", [
-                    "kode_pesanan" => "PSN-" . time(),
+                    "kode_pesanan" => $kodePesanan,
                     "kode_produk"  => $p['id'],
                     "jumlah"       => $p['qty'],
                     "nominal"      => $p['qty'] * $p['harga'],
                     "nama_pembeli" => $nama_pembeli,
+                    "telepon"      => $telepon,
+                    "alamat"       => $alamat
                 ]);
 
                 if ($pesananResponse->successful()) {

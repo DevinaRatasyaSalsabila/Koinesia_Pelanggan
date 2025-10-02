@@ -193,12 +193,12 @@
                                         </h5>
                                     </div>
                                     <div class="add-to-cart bg-yellow ico-10">
-                                        <button type="button" class="shadow-none btn-cart-add-1 bg-yellow text-light ico-10"
+                                        <button type="button" class="shadow-none btn-sm btn-cart-add-1 bg-yellow text-light ico-10"
                                             data-id="{{ $prod['kode_produk'] }}" data-nama="{{ $prod['nama_produk'] }}"
                                             data-harga="{{ $prod['harga_Satuan'] }}" data-stok="{{ $prod['stok_produk'] }}" data-ukuran="{{ $prod['ukuran_produk'] }}"
                                             data-gambar="{{ $prod['gambar_url'] }}">
                                             <span class="flaticon-shopping-bag"></span>
-                                            Keranjang
+                                            {{-- Keranjang --}}
                                         </button>
                                     </div>
                                 </div>
