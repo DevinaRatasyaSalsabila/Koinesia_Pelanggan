@@ -217,10 +217,8 @@
             <div class="row">
                 <div class="col-lg-12 testimonials white-color">
 
-
                     <!-- TRANSPARENT QUOTE ICON -->
                     <div class="quote-icon"></div>
-
 
                     <!-- TESTIMONIALS CONTENT -->
                     <div class="flexslider">
@@ -332,12 +330,10 @@
                         </ul>
                     </div>
 
-
                 </div>
             </div> <!-- End row -->
         </div> <!-- End container -->
     </div> <!-- END TESTIMONIALS-1 -->
-
 
     <section id="kontak" class="py-5">
         <div class="container">

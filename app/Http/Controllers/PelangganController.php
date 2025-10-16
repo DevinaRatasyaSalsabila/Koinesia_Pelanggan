@@ -44,11 +44,24 @@ class PelangganController extends Controller
         Log::info("Pesanan diterima di pelanggan:", $request->all());
 
         $nama_pembeli = $request->nama_pembeli;
-        $telepon      = $request->telepon;
+        $telepon = preg_replace('/\D/', '', $request->telepon);
         $alamat       = $request->alamat;
 
+        // kalau 0 didepan, ubah jd 62
+        if (substr($telepon, 0, 1) === '0') {
+            $telepon = '62' . substr($telepon, 1);
+        }
+        // kalau 8 didepan, tambahin 62 didepan
+        else if (substr($telepon, 0, 1) === '8') {
+            $telepon = '62' . $telepon;
+        }
+        // kalau _62, hapus +nya
+        else if (substr($telepon, 0, 3) === '+62') {
+            $telepon = substr($telepon, 1);
+        }
+
         $kodePesanan = 'PESN-' . date('dm') . '-' . date('Hi') . '-' . Str::upper(Str::random(3));
-        
+
         foreach ($request->produk as $p) {
             Log::info("Kirim request reduce stock ke admin:", [$p]);
 
