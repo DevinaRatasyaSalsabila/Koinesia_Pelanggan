@@ -59,7 +59,7 @@
                                             </div>
 
                                             <div class="col-md-12 col-lg-6">
-                                                 <label for="">Nomor HP Penerima</label>
+                                                <label for="">Nomor HP Penerima</label>
                                                 <div class="mb-3 input-group">
                                                     <span class="input-group-text" id="basic-addon1">62</span>
                                                     <input type="text" class="form-control" placeholder="Username"
@@ -139,7 +139,8 @@
     @push('script')
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                let checkout = JSON.parse(localStorage.getItem("checkout")) || [];
+                let checkoutAll = JSON.parse(localStorage.getItem("checkout")) || [];
+                let checkout = checkoutAll.filter(item => item.dipilih);
                 const tbody = document.querySelector("#myTable tbody");
                 const totalKeseluruhanEl = document.querySelector("#total-harga");
 
@@ -157,29 +158,29 @@
                             }
 
                             tbody.innerHTML += `
-                                    <tr>
-                                        <td class="text-center">
-                                            <input type="checkbox" class="pilih-checkbox" data-index="${index}" ${item.dipilih ? "checked" : ""}>
-                                        </td>
-                                        <td>
-                                            <div class="cart-product-desc d-flex align-items-center">
-                                                <img src="${item.gambar}" width="60" style="margin-right:10px; border-radius:6px;">
-                                                <div>
-                                                    <h5 class="mb-1 h5-sm">${item.nama}</h5>
-                                                    <p class="p-sm text-muted">Kode: ${item.id}</p>
+                                        <tr>
+                                            <td class="text-center">
+                                                <input type="checkbox" class="pilih-checkbox" data-index="${index}" ${item.dipilih ? "checked" : ""}>
+                                            </td>
+                                            <td>
+                                                <div class="cart-product-desc d-flex align-items-center">
+                                                    <img src="${item.gambar}" width="60" style="margin-right:10px; border-radius:6px;">
+                                                    <div>
+                                                        <h5 class="mb-1 h5-sm">${item.nama}</h5>
+                                                        <p class="p-sm text-muted">Kode: ${item.id}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td><h5>Rp ${new Intl.NumberFormat('id-ID').format(item.harga)}</h5></td>
-                                        <td><h5>${item.qty} Stok = ${item.stok}</h5></td>
-                                        <td><h5>Rp ${new Intl.NumberFormat('id-ID').format(total)}</h5></td>
-                                        <td class="text-end">
-                                            <button class="hapus-btn btn btn-sm btn-danger" data-index="${index}">
-                                                <i class="fas fa-trash-alt" style="color: red;></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                `;
+                                            </td>
+                                            <td><h5>Rp ${new Intl.NumberFormat('id-ID').format(item.harga)}</h5></td>
+                                            <td><h5>${item.qty} Stok = ${item.stok}</h5></td>
+                                            <td class="text-center"><h5>Rp ${new Intl.NumberFormat('id-ID').format(total)}</h5></td>
+                                            <td class="text-end">
+                                                <button class="hapus-btn btn btn-sm btn-danger" data-index="${index}">
+                                                    <i class="fas fa-trash-alt" style="color: red;"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    `;
                         });
                     }
 

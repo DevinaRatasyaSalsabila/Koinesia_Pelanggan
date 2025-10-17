@@ -1,7 +1,7 @@
 @extends('main')
 @section('content')
 
-//terus kasih validasi supaya kalo barang 0 itu gabisa di checked, terus jg gabisa milih barang lebih dari stok
+    //terus kasih validasi supaya kalo barang 0 itu gabisa di checked, terus jg gabisa milih barang lebih dari stok
     <div id="cart-page" class="page-hero-section division">
         <div class="container">
             <div class="row">
@@ -85,7 +85,6 @@
     @push('script')
         <script>
             document.addEventListener("DOMContentLoaded", async () => {
-                // 🔸 ambil produk terbaru dari API project utama
                 async function fetchLatestProducts() {
                     try {
                         const response = await fetch("http://127.0.0.1:8000/api/products");
@@ -97,7 +96,6 @@
                     }
                 }
 
-                // 🔸 sinkronkan cart localStorage dengan stok database
                 async function syncCartWithDatabase() {
                     let cart = JSON.parse(localStorage.getItem("cart")) || [];
                     const latestProducts = await fetchLatestProducts();
@@ -108,6 +106,7 @@
                             item.stok = found.stok_produk;
                             item.harga = found.harga_Satuan;
                         }
+                        if (item.dipilih === undefined) item.dipilih = false; // ⬅️ default false
                         return item;
                     });
 
@@ -115,70 +114,83 @@
                     return cart;
                 }
 
-                // 🔸 ambil data cart yang sudah disinkronkan
                 let cart = await syncCartWithDatabase();
-
                 const tbody = document.querySelector("#myTable tbody");
                 const totalKeseluruhanEl = document.querySelector(".product-price-total-keseluruhan h5");
 
                 tbody.innerHTML = "";
-                let totalKeseluruhan = 0;
-
                 if (cart.length === 0) {
                     tbody.innerHTML = "<tr><td colspan='6' class='text-center'>Keranjang kosong</td></tr>";
                 } else {
                     cart.forEach((item, index) => {
                         let total = item.harga * item.qty;
+                        let stokKosong = item.stok === 0;
 
                         tbody.innerHTML += `
-                            <tr>
-                                <td data-label="Pilih" class="text-center">
-                                    <input type="checkbox" class="pilih-checkbox" data-index="${index}" ${item.dipilih ? "checked" : ""}>
-                                </td>
-                                <td data-label="Produk" class="product-name">
-                                    <div class="cart-product-desc d-flex align-items-center">
-                                        <img src="${item.gambar}" width="60" style="margin-right:10px; border-radius:6px;">
-                                        <div>
-                                            <h5 class="mb-1 h5-sm">${item.nama}</h5>
-                                            <p class="p-sm text-muted">Kode: ${item.id}</p>
-                                        </div>
+                        <tr class="${stokKosong ? 'opacity-50' : ''}">
+                            <td data-label="Pilih" class="text-center">
+                                <input
+                                    type="checkbox"
+                                    class="pilih-checkbox"
+                                    data-index="${index}"
+                                    ${stokKosong ? "disabled" : (item.dipilih ? "checked" : "")}
+                                >
+                            </td>
+                            <td data-label="Produk" class="product-name">
+                                <div class="cart-product-desc d-flex align-items-center">
+                                    <img src="${item.gambar}" width="60" style="margin-right:10px; border-radius:6px;">
+                                    <div>
+                                        <h5 class="mb-1 h5-sm">${item.nama}</h5>
+                                        <p class="p-sm text-muted">Kode: ${item.id}</p>
                                     </div>
-                                </td>
-                                <td data-label="Harga" class="product-price">
-                                    <h5 class="h5-md">Rp ${new Intl.NumberFormat('id-ID').format(item.harga)}</h5>
-                                </td>
-                                <td data-label="Item" class="product-qty">
-                                    <input class="qty-input" type="number" min="1" value="${item.qty}" data-index="${index}">
-                                </td>
-                                <td data-label="Stok" class="product-qty">
-                                    <h5 class="h5-md">${item.stok ?? '-'}</h5>
-                                </td>
-                                <td data-label="Total" class="product-price-total text-end">
-                                    <h5 class="h5-md">Rp ${new Intl.NumberFormat('id-ID').format(total)}</h5>
-                                </td>
-                                <td data-label="Hapus" class="td-trash text-end">
-                                    <button class="hapus-btn btn btn-sm btn-outline-danger" data-index="${index}">
-                                        <i class="far fa-trash-alt" style="color: red;"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        `;
+                                </div>
+                            </td>
+                            <td data-label="Harga" class="product-price">
+                                <h5 class="h5-md">Rp ${new Intl.NumberFormat('id-ID').format(item.harga)}</h5>
+                            </td>
+                            <td data-label="Item" class="product-qty">
+                                <input
+                                    class="qty-input"
+                                    type="number"
+                                    min="1"
+                                    value="${item.qty}"
+                                    data-index="${index}"
+                                    ${stokKosong ? "disabled" : ""}
+                                >
+                            </td>
+                            <td data-label="Stok" class="product-qty">
+                                ${stokKosong
+                                ? '<span class="badge bg-danger">Stok Habis</span>'
+                                : '<h5 class="h5-md">' + (item.stok ?? '-') + '</h5>'}
+                            </td>
+                            <td data-label="Total" class="product-price-total text-end">
+                                <h5 class="h5-md">Rp ${new Intl.NumberFormat('id-ID').format(total)}</h5>
+                            </td>
+                            <td data-label="Hapus" class="td-trash text-end">
+                                <button class="hapus-btn btn btn-sm btn-outline-danger" data-index="${index}">
+                                    <i class="far fa-trash-alt" style="color: red;"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
                     });
                 }
 
-                // 🔸 fungsi total keseluruhan
+                // ✅ hitung total hanya produk yang dicentang
                 function hitungTotal() {
-                    totalKeseluruhan = 0;
-                    cart.forEach((item) => {
-                        if (item.dipilih) {
+                    let totalKeseluruhan = 0;
+                    cart.forEach(item => {
+                        if (item.dipilih && item.stok > 0) {
                             totalKeseluruhan += item.harga * item.qty;
                         }
                     });
-                    totalKeseluruhanEl.textContent = "Rp " + new Intl.NumberFormat('id-ID').format(totalKeseluruhan);
+                    totalKeseluruhanEl.textContent =
+                        "Rp " + new Intl.NumberFormat('id-ID').format(totalKeseluruhan);
                 }
-                hitungTotal();
 
-                // 🔸 pilih produk
+                hitungTotal(); // langsung panggil biar sync di awal
+
+                // checkbox listener
                 document.querySelectorAll(".pilih-checkbox").forEach(checkbox => {
                     checkbox.addEventListener("change", () => {
                         let index = checkbox.dataset.index;
@@ -188,7 +200,7 @@
                     });
                 });
 
-                // 🔸 hapus produk
+                // hapus produk
                 document.querySelectorAll(".hapus-btn").forEach(btn => {
                     btn.addEventListener("click", () => {
                         let index = btn.dataset.index;
@@ -198,22 +210,20 @@
                     });
                 });
 
-                // 🔸 ubah qty
+                // ubah qty
                 document.querySelectorAll(".qty-input").forEach(input => {
                     input.addEventListener("change", () => {
                         let index = input.dataset.index;
                         cart[index].qty = parseInt(input.value);
-
-                        let totalPerItem = cart[index].harga * cart[index].qty;
                         const totalCell = input.closest("tr").querySelector(".product-price-total h5");
-                        totalCell.textContent = "Rp " + new Intl.NumberFormat("id-ID").format(totalPerItem);
-
+                        totalCell.textContent =
+                            "Rp " + new Intl.NumberFormat("id-ID").format(cart[index].harga * cart[index].qty);
                         localStorage.setItem("cart", JSON.stringify(cart));
                         hitungTotal();
                     });
                 });
 
-                // 🔸 lanjutkan pemesanan
+                // lanjutkan
                 const lanjutkanBtn = document.querySelector("a.btn-meat");
                 lanjutkanBtn.addEventListener("click", (e) => {
                     e.preventDefault();
@@ -224,4 +234,5 @@
             });
         </script>
     @endpush
+
 @endsection
