@@ -1,7 +1,5 @@
 @extends('main')
 @section('content')
-
-    //terus kasih validasi supaya kalo barang 0 itu gabisa di checked, terus jg gabisa milih barang lebih dari stok
     <div id="cart-page" class="page-hero-section division">
         <div class="container">
             <div class="row">
@@ -153,6 +151,7 @@
                                     class="qty-input"
                                     type="number"
                                     min="1"
+                                    max="${item.stok}"
                                     value="${item.qty}"
                                     data-index="${index}"
                                     ${stokKosong ? "disabled" : ""}
@@ -215,24 +214,39 @@
                     input.addEventListener("change", () => {
                         let index = input.dataset.index;
                         cart[index].qty = parseInt(input.value);
-                        const totalCell = input.closest("tr").querySelector(".product-price-total h5");
+                        const totalCell = input.closest("tr").querySelector(
+                            ".product-price-total h5");
                         totalCell.textContent =
-                            "Rp " + new Intl.NumberFormat("id-ID").format(cart[index].harga * cart[index].qty);
+                            "Rp " + new Intl.NumberFormat("id-ID").format(cart[index].harga * cart[
+                                index].qty);
                         localStorage.setItem("cart", JSON.stringify(cart));
                         hitungTotal();
                     });
                 });
 
-                // lanjutkan
+                // ✅ Lanjutkan hanya kirim item yang dipilih dan stoknya masih ada
                 const lanjutkanBtn = document.querySelector("a.btn-meat");
                 lanjutkanBtn.addEventListener("click", (e) => {
                     e.preventDefault();
-                    let terpilih = cart.filter(item => item.dipilih);
+
+                    // ambil ulang dari localStorage biar paling update
+                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+                    // cuma item yang dipilih (checked) & stoknya masih > 0
+                    let terpilih = cart.filter(item => item.dipilih && item.stok > 0);
+
+                    if (terpilih.length === 0) {
+                        alert("Pilih minimal satu produk sebelum melanjutkan ya 🥺");
+                        return;
+                    }
+
+                    // simpan ke localStorage checkout
                     localStorage.setItem("checkout", JSON.stringify(terpilih));
+
+                    // pindah halaman ke format/index
                     window.location.href = lanjutkanBtn.getAttribute("href");
                 });
             });
         </script>
     @endpush
-
 @endsection

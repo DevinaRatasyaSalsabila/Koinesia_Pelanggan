@@ -71,8 +71,7 @@
 
                                         <div class="col-md-12 col-lg-12">
                                             <label for="">Alamat Lengkap</label>
-                                            <textarea name="alamat" class="form-control "
-                                                placeholder="Masukkan Alamat Lengkap"></textarea>
+                                            <textarea name="alamat" class="form-control " placeholder="Masukkan Alamat Lengkap"></textarea>
                                         </div>
 
                                         <div class="text-center col-md-12">
@@ -99,7 +98,7 @@
                                             <th scope="col">Harga</th>
                                             <th scope="col">Item</th>
                                             <th scope="col" class="text-center">Total</th>
-                                            <th scope="col" class="text-end">Hapus</th>
+                                            {{-- <th scope="col" class="text-end">Hapus</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -139,8 +138,7 @@
     @push('script')
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                let checkoutAll = JSON.parse(localStorage.getItem("checkout")) || [];
-                let checkout = checkoutAll.filter(item => item.dipilih);
+                let checkout = JSON.parse(localStorage.getItem("checkout")) || [];
                 const tbody = document.querySelector("#myTable tbody");
                 const totalKeseluruhanEl = document.querySelector("#total-harga");
 
@@ -174,11 +172,11 @@
                                             <td><h5>Rp ${new Intl.NumberFormat('id-ID').format(item.harga)}</h5></td>
                                             <td><h5>${item.qty} Stok = ${item.stok}</h5></td>
                                             <td class="text-center"><h5>Rp ${new Intl.NumberFormat('id-ID').format(total)}</h5></td>
-                                            <td class="text-end">
-                                                <button class="hapus-btn btn btn-sm btn-danger" data-index="${index}">
-                                                    <i class="fas fa-trash-alt" style="color: red;"></i>
-                                                </button>
-                                            </td>
+                                             <td class="text-end">
+                                                 <button class="hapus-btn btn btn-sm btn-danger" data-index="${index}">
+                                                     <i class="fas fa-trash-alt" style="color: red;"></i>
+                                                 </button>
+                                             </td>
                                         </tr>
                                     `;
                         });
@@ -210,7 +208,7 @@
 
             document.addEventListener("DOMContentLoaded", () => {
                 const form = document.querySelector("form");
-                form.addEventListener("submit", function (e) {
+                form.addEventListener("submit", function(e) {
                     let checkout = JSON.parse(localStorage.getItem("checkout")) || [];
 
                     let dipilih = checkout.filter(item => item.dipilih);
