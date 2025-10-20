@@ -58,7 +58,8 @@
                                                     placeholder="Masukkan Nama Penerima">
                                             </div>
 
-                                            <div class="col-md-12 col-lg-6 mb-2">
+                                            <div class="col-md-12 col-lg-6">
+                                                <label for="">Nomor HP Penerima</label>
                                                 <div class="mb-3 input-group">
                                                     <span class="input-group-text" id="basic-addon1">62</span>
                                                     <input type="text" class="form-control" placeholder="Username"
@@ -70,8 +71,7 @@
 
                                         <div class="col-md-12 col-lg-12 mb-2">
                                             <label for="">Alamat Lengkap</label>
-                                            <textarea name="alamat" class="form-control "
-                                                placeholder="Masukkan Alamat Lengkap"></textarea>
+                                            <textarea name="alamat" class="form-control " placeholder="Masukkan Alamat Lengkap"></textarea>
                                         </div>
 
                                         <div class="text-center col-md-12">
@@ -98,7 +98,7 @@
                                             <th scope="col">Harga</th>
                                             <th scope="col">Item</th>
                                             <th scope="col" class="text-center">Total</th>
-                                            <th scope="col" class="text-end">Hapus</th>
+                                            {{-- <th scope="col" class="text-end">Hapus</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -156,29 +156,29 @@
                             }
 
                             tbody.innerHTML += `
-                                    <tr>
-                                        <td class="text-center">
-                                            <input type="checkbox" class="pilih-checkbox" data-index="${index}" ${item.dipilih ? "checked" : ""}>
-                                        </td>
-                                        <td>
-                                            <div class="cart-product-desc d-flex align-items-center">
-                                                <img src="${item.gambar}" width="60" style="margin-right:10px; border-radius:6px;">
-                                                <div>
-                                                    <h5 class="mb-1 h5-sm">${item.nama}</h5>
-                                                    <p class="p-sm text-muted">Kode: ${item.id}</p>
+                                        <tr>
+                                            <td class="text-center">
+                                                <input type="checkbox" class="pilih-checkbox" data-index="${index}" ${item.dipilih ? "checked" : ""}>
+                                            </td>
+                                            <td>
+                                                <div class="cart-product-desc d-flex align-items-center">
+                                                    <img src="${item.gambar}" width="60" style="margin-right:10px; border-radius:6px;">
+                                                    <div>
+                                                        <h5 class="mb-1 h5-sm">${item.nama}</h5>
+                                                        <p class="p-sm text-muted">Kode: ${item.id}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td><h5>Rp ${new Intl.NumberFormat('id-ID').format(item.harga)}</h5></td>
-                                        <td><h5>${item.qty} Stok = ${item.stok}</h5></td>
-                                        <td><h5>Rp ${new Intl.NumberFormat('id-ID').format(total)}</h5></td>
-                                        <td class="text-end">
-                                            <button class="hapus-btn btn btn-sm btn-outline-danger" data-index="${index}">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                `;
+                                            </td>
+                                            <td><h5>Rp ${new Intl.NumberFormat('id-ID').format(item.harga)}</h5></td>
+                                            <td><h5>${item.qty} Stok = ${item.stok}</h5></td>
+                                            <td class="text-center"><h5>Rp ${new Intl.NumberFormat('id-ID').format(total)}</h5></td>
+                                             <td class="text-end">
+                                                 <button class="hapus-btn btn btn-sm btn-danger" data-index="${index}">
+                                                     <i class="fas fa-trash-alt" style="color: red;"></i>
+                                                 </button>
+                                             </td>
+                                        </tr>
+                                    `;
                         });
                     }
 
@@ -208,7 +208,7 @@
 
             document.addEventListener("DOMContentLoaded", () => {
                 const form = document.querySelector("form");
-                form.addEventListener("submit", function (e) {
+                form.addEventListener("submit", function(e) {
                     let checkout = JSON.parse(localStorage.getItem("checkout")) || [];
 
                     let dipilih = checkout.filter(item => item.dipilih);

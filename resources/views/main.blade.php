@@ -180,11 +180,11 @@
                     <div class="line-menu line-half last-line"></div>
                 </div>
 
-                <!-- MAIN MENU -->
+                <!-- MAIN MENU (tambahin scrollspy) -->
                 <nav class="navik-menu menu-caret navik-yellow">
                     <ul class="top-list">
                         <li>
-                            <a href="#">Beranda</a>
+                            <a href="{{ url('/') }}">Beranda</a>
                         </li>
 
                         <li>

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class PelangganController extends Controller
 {
@@ -41,6 +43,38 @@ class PelangganController extends Controller
     {
         Log::info("Pesanan diterima di pelanggan:", $request->all());
 
+        $nama_pembeli = $request->nama_pembeli;
+        $telepon = preg_replace('/\D/', '', $request->telepon);
+        $alamat  = $request->alamat;
+
+        // Normalisasi nomor telepon
+        if (substr($telepon, 0, 1) === '0') {
+            $telepon = '62' . substr($telepon, 1);
+        } elseif (substr($telepon, 0, 1) === '8') {
+            $telepon = '62' . $telepon;
+        } elseif (substr($telepon, 0, 3) === '+62') {
+            $telepon = substr($telepon, 1);
+        }
+
+        $kodePesanan = 'PESN-' . date('dm') . '-' . date('Hi') . '-' . Str::upper(Str::random(3));
+
+        $detailPesanan = "";
+        $totalHarga = 0;
+
+    //      $pembeli = DB::table('pembeli')->where('no_hp', $request->no_hp)->first();
+
+    // if (!$pembeli) {
+    //     $idPembeli = DB::table('pembeli')->insertGetId([
+    //         'nama_pembeli' => $request->nama_pembeli,
+    //         'no_hp' => $request->no_hp,
+    //         'alamat' => $request->alamat,
+    //         'created_at' => now(),
+    //         'updated_at' => now()
+    //     ]);
+    // } else {
+    //     $idPembeli = $pembeli->id_pembeli;
+    // }
+
         foreach ($request->produk as $p) {
             Log::info("Kirim request reduce stock ke admin:", [$p]);
 
@@ -51,11 +85,20 @@ class PelangganController extends Controller
             if ($response->successful()) {
                 Log::info("Stok berhasil dikurangi:", $response->json());
 
+                $nominal = $p['qty'] * $p['harga'];
+                $totalHarga += $nominal;
+
+                // Tambah detail pesan untuk WhatsApp
+                // $detailPesanan .= "- {$p['nama']} ({$p['qty']}x) = Rp " . number_format($nominal, 0, ',', '.') . "\n";
+
                 $pesananResponse = Http::post("http://127.0.0.1:8000/api/pesanan/API", [
-                    "kode_pesanan" => "PSN-" . time(),
+                    "kode_pesanan" => $kodePesanan,
                     "kode_produk"  => $p['id'],
                     "jumlah"       => $p['qty'],
-                    "nominal"      => $p['qty'] * $p['harga']
+                    "nominal"      => $nominal,
+                    "nama_pembeli" => $nama_pembeli,
+                    "telepon"      => $telepon,
+                    "alamat"       => $alamat
                 ]);
 
                 if ($pesananResponse->successful()) {
@@ -66,14 +109,26 @@ class PelangganController extends Controller
                         'body'   => $pesananResponse->body(),
                     ]);
                 }
+            } else {
+                Log::error("Gagal reduce stok produk {$p['id']}", [
+                    'status' => $response->status(),
+                    'body'   => $response->body(),
+                ]);
             }
-
-            Log::info("Response dari admin:", ['data' => $response->json()]);
         }
+
+        // ✅ Pesan WhatsApp (semua variabel udah defined)
+        $pesan = "Halo *{$nama_pembeli}*, terima kasih sudah order di Azza Koi Farm 🐟✨\n\n"
+            . "Kode Pesanan: *{$kodePesanan}*\n\n"
+            . "Detail pesanan kamu:\n"
+            . "{$detailPesanan}\n"
+            . "Total: *Rp " . number_format($totalHarga, 0, ',', '.') . "*\n\n"
+            . "Pesananmu sudah masuk dan akan segera diproses ya 👍";
+
+        $this->apicall($telepon, $pesan);
 
         return back()->with('success', 'Pesanan terkirim ke admin via WhatsApp!');
     }
-
 
     private function apicall($no_hp, $pesan)
     {
