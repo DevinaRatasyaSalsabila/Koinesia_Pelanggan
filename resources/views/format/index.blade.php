@@ -35,7 +35,7 @@
         <section class="wide-100 cart-page division">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-2">
+                    <div class="col-lg-4">
                         <div class="mt-5 card bg-meat text-light">
                             <div class="card-body">
                                 <p>
@@ -46,29 +46,29 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-10">
-                        <div class="p-3 mb-5 rounded shadow bg-body-tertiary">
+                    <div class="col-lg-8">
+                        <div class="mb-5 rounded  bg-body-tertiary">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="form-holder">
                                         <div class="row">
-                                            <div class="col-md-12 col-lg-6">
+                                            <div class="col-md-12 col-lg-6 mb-2">
                                                 <label for="">Nama Penerima</label>
                                                 <input type="text" name="nama_pembeli" class="form-control "
                                                     placeholder="Masukkan Nama Penerima">
                                             </div>
 
-                                            <div class="col-md-12 col-lg-6">
+                                            <div class="col-md-12 col-lg-6 mb-2">
                                                 <div class="mb-3 input-group">
                                                     <span class="input-group-text" id="basic-addon1">62</span>
                                                     <input type="text" class="form-control" placeholder="Username"
-                                                        name="telepon" aria-label="Username"
+                                                        name="telepon" aria-label="Masukkan Nomor Telepon"
                                                         aria-describedby="basic-addon1">
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-12 col-lg-12">
+                                        <div class="col-md-12 col-lg-12 mb-2">
                                             <label for="">Alamat Lengkap</label>
                                             <textarea name="alamat" class="form-control "
                                                 placeholder="Masukkan Alamat Lengkap"></textarea>
@@ -85,7 +85,7 @@
                 </div>
             </div>
 
-            <section id="cart-1" class="wide-100 cart-page division">
+            <section id="cart-1" >
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">

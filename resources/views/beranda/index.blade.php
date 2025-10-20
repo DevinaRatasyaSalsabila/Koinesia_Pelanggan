@@ -1,5 +1,14 @@
 @extends('main')
 @section('content')
+    <style>
+        .btn-cart-add-1 {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: transparent;
+            box-shadow: none;
+        }
+    </style>
     {{-- <section id="hero-9" class="bg-03 hero-section">
         <div class="bg-fixed bg-inner division">
             <div class="container">
@@ -22,7 +31,7 @@
     </section> --}}
 
     <!-- HERO-4
-                                                                                                                                           ============================================= -->
+                                                                                                                                               ============================================= -->
     <section id="hero-4" class="bg-fixed hero-section division">
         <div class="container">
             <div class="row d-flex align-items-center">
@@ -193,9 +202,12 @@
                                         </h5>
                                     </div>
                                     <div class="add-to-cart bg-yellow ico-10">
-                                        <button type="button" class="shadow-none btn-cart-add-1 bg-yellow text-light ico-10"
+                                        <button type="button"
+                                            class="shadow-none btn-cart-add-1 bg-yellow text-light ico-10"
                                             data-id="{{ $prod['kode_produk'] }}" data-nama="{{ $prod['nama_produk'] }}"
-                                            data-harga="{{ $prod['harga_Satuan'] }}" data-stok="{{ $prod['stok_produk'] }}" data-ukuran="{{ $prod['ukuran_produk'] }}"
+                                            data-harga="{{ $prod['harga_Satuan'] }}"
+                                            data-stok="{{ $prod['stok_produk'] }}"
+                                            data-ukuran="{{ $prod['ukuran_produk'] }}"
                                             data-gambar="{{ $prod['gambar_url'] }}">
                                             <span class="flaticon-shopping-bag"></span>
                                             Keranjang
