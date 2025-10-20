@@ -44,36 +44,28 @@ class PelangganController extends Controller
         Log::info("Pesanan diterima di pelanggan:", $request->all());
 
         $nama_pembeli = $request->nama_pembeli;
-        $telepon = preg_replace('/\D/', '', $request->telepon);
         $alamat  = $request->alamat;
 
-        // Normalisasi nomor telepon
-        if (substr($telepon, 0, 1) === '0') {
-            $telepon = '62' . substr($telepon, 1);
-        } elseif (substr($telepon, 0, 1) === '8') {
-            $telepon = '62' . $telepon;
-        } elseif (substr($telepon, 0, 3) === '+62') {
-            $telepon = substr($telepon, 1);
+        $telepon = preg_replace('/\D/', '', $request->telepon); // hapus semua non-digit
+
+        // Normalisasi ke 08xxxx
+        if (str_starts_with($telepon, '62')) {
+            // 62xxxx → 08xxxx
+            $telepon = '0' . substr($telepon, 2);
+        } elseif (str_starts_with($telepon, '+62')) {
+            // +62xxxx → 08xxxx
+            $telepon = '0' . substr($telepon, 3);
+        } elseif (!str_starts_with($telepon, '0')) {
+            // kalau user masukin tanpa 0, misal 857xxxx → 0857xxxx
+            $telepon = '0' . $telepon;
         }
+
+        Log::info("Nomor telepon setelah normalisasi:", ['telepon' => $telepon]);
 
         $kodePesanan = 'PESN-' . date('dm') . '-' . date('Hi') . '-' . Str::upper(Str::random(3));
 
         $detailPesanan = "";
         $totalHarga = 0;
-
-    //      $pembeli = DB::table('pembeli')->where('no_hp', $request->no_hp)->first();
-
-    // if (!$pembeli) {
-    //     $idPembeli = DB::table('pembeli')->insertGetId([
-    //         'nama_pembeli' => $request->nama_pembeli,
-    //         'no_hp' => $request->no_hp,
-    //         'alamat' => $request->alamat,
-    //         'created_at' => now(),
-    //         'updated_at' => now()
-    //     ]);
-    // } else {
-    //     $idPembeli = $pembeli->id_pembeli;
-    // }
 
         foreach ($request->produk as $p) {
             Log::info("Kirim request reduce stock ke admin:", [$p]);
@@ -88,8 +80,7 @@ class PelangganController extends Controller
                 $nominal = $p['qty'] * $p['harga'];
                 $totalHarga += $nominal;
 
-                // Tambah detail pesan untuk WhatsApp
-                // $detailPesanan .= "- {$p['nama']} ({$p['qty']}x) = Rp " . number_format($nominal, 0, ',', '.') . "\n";
+                $detailPesanan .= "- {$nama_pembeli} ({$p['qty']}x) = Rp " . number_format($nominal, 0, ',', '.') . "\n";
 
                 $pesananResponse = Http::post("http://127.0.0.1:8000/api/pesanan/API", [
                     "kode_pesanan" => $kodePesanan,
@@ -117,7 +108,6 @@ class PelangganController extends Controller
             }
         }
 
-        // ✅ Pesan WhatsApp (semua variabel udah defined)
         $pesan = "Halo *{$nama_pembeli}*, terima kasih sudah order di Azza Koi Farm 🐟✨\n\n"
             . "Kode Pesanan: *{$kodePesanan}*\n\n"
             . "Detail pesanan kamu:\n"
@@ -130,26 +120,27 @@ class PelangganController extends Controller
         return back()->with('success', 'Pesanan terkirim ke admin via WhatsApp!');
     }
 
-    private function apicall($no_hp, $pesan)
+    private function apicall($telepon, $pesan)
     {
         $client = new Client();
         $url = 'https://apiwa.smkpgriwlingi.sch.id/api/sendBulkMessage';
 
         $data = [
             'apiKey'  => env('WHAPI_KEY', 'f60d05297f0af62109d4ec9ec274bd32'),
-            'phone'   => [$no_hp],
+            'phone'   => json_encode([$telepon]),
             'message' => $pesan,
             'delay'   => 1,
         ];
 
         try {
+            Log::info('Data yang dikirim ke WA API:', $data);
+
             $response = $client->post($url, ['form_params' => $data]);
             Log::info('WA API response: ' . $response->getBody());
         } catch (\Exception $e) {
             Log::error('WA API error: ' . $e->getMessage());
         }
     }
-
 
     public function startService()
     {
